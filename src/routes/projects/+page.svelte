@@ -6,6 +6,9 @@
   {name: "Project 3", slug: null, language: "Rubyh", id: 2}
 ];
 
+// for (const item of projects) {
+//     item["slug"] = `/projects/${item.linkText.replaceAll(" ", "-").toLowerCase()}`;
+//   }
 
 </script>
 

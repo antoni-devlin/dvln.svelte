@@ -1,10 +1,10 @@
 <script>
 
   let projects = [
-  {name: "Project 1", slug: null, language: "Node", id: 0},
-  {name: "Project 2", slug: null, language: "Python", id: 1},
-  {name: "Project 3", slug: null, language: "Rubyh", id: 2}
-];
+    { name: "Project 1", language: "Node", id: 0 },
+    { name: "Project 2", language: "Python", id: 1 },
+    { name: "Project 3", language: "Ruby", id: 2 },
+  ];
 
 // for (const item of projects) {
 //     item["slug"] = `/projects/${item.linkText.replaceAll(" ", "-").toLowerCase()}`;

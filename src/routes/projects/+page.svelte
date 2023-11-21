@@ -15,9 +15,11 @@
 
 <ul>
   {#each projects as project (project.id)}
-  <li><a href="/projects/{project.slug}">{project.name} ({project.language})</a></li>
+    <li>
+      <a href="/projects/{project.slug}">{project.name} ({project.language})</a>
+    </li>
   {:else}
-  No projects!
+    No projects!
   {/each}
 </ul>
 

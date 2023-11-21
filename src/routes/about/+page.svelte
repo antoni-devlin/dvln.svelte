@@ -1,5 +1,6 @@
 <script>
-import { onMount } from 'svelte';
+  import { onMount } from "svelte";
+  import BookCard from "$lib/BookCard.svelte";
 
   let userId = "105494066543086834878"; //My Google Books userId - this is publically available
   let fields =
@@ -26,6 +27,8 @@ import { onMount } from 'svelte';
 
     return fetchedBooks;
   }
+
+  onMount(async () => constructBooks(await getBooks(4)));
 </script>
 
 <h1>About</h1>
@@ -36,9 +39,17 @@ import { onMount } from 'svelte';
   animi, eos quia, voluptates velit rem ratione perspiciatis nulla!
 </p>
 
-<h2> Book list </h2>
-
-
+<div>
+  {#each booklist as book}
+    <BookCard
+      title={book.title}
+      author={book.authors}
+      thumb={book.thumbnail}
+      desc={book.description}
+      infoLink={book.infoLink}
+    />
+  {/each}
+</div>
 
 <style>
 

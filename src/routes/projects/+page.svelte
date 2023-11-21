@@ -6,10 +6,9 @@
     { name: "Project 3", language: "Ruby", id: 2 },
   ];
 
-// for (const item of projects) {
-//     item["slug"] = `/projects/${item.linkText.replaceAll(" ", "-").toLowerCase()}`;
-//   }
-
+  for (const project of projects) {
+    project["slug"] = `${project.name.replaceAll(" ", "-").toLowerCase()}`;
+  }
 </script>
 
 <h1>Projects</h1>

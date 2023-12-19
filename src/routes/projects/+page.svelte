@@ -1,28 +1,25 @@
 <script>
+  import Project from "$lib/Project.svelte";
 
-  let projects = [
-    { name: "Project 1", language: "Node", id: 0 },
-    { name: "Project 2", language: "Python", id: 1 },
-    { name: "Project 3", language: "Ruby", id: 2 },
-  ];
-
-  for (const project of projects) {
-    project["slug"] = `${project.name.replaceAll(" ", "-").toLowerCase()}`;
-  }
+  let projects = [];
 </script>
 
 <h1>Projects</h1>
 
 <ul>
   {#each projects as project (project.id)}
-    <li>
-      <a href="/projects/{project.slug}">{project.name} ({project.language})</a>
-    </li>
+    <Project
+      thumb={project.thumb}
+      name={project.name}
+      summary={project.summary}
+      link={project.link}
+    />
   {:else}
-    No projects!
+    No projects! Check out <a href="https://www.github.com/antoni-devlin"
+      >my Github</a
+    >!
   {/each}
 </ul>
 
 <style>
-
 </style>

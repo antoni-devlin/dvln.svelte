@@ -15,6 +15,11 @@
   }
 
   img {
-    width: 20vw;
+    width: 100%;
+  }
+
+  .project {
+    min-width: 400px;
+    max-width: 10vw;
   }
 </style>

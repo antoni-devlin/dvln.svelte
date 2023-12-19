@@ -7,25 +7,29 @@
       thumb: "https://picsum.photos/960/540",
       summary: "Lorem ipsum",
       link: "https://www.github.com/antoni-devlin",
+      tags: ["Python", "Javascript"],
     },
     {
       name: "Project 2",
       thumb: "https://picsum.photos/960/540",
       summary:
-        "Pellentesque venenatis purus nec tellus pharetra, id interdum dui ullamcorper. Donec commodo justo sapien, et facilisis elit malesuada in. Nullam non luctus eros, efficitur hendrerit metus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut congue sodales enim. Phasellus sit amet nisl sapien. Curabitur ornare a nisi a sagittis. Sed justo neque, dapibus ut odio nec, viverra sagittis turpis.",
+        "Pellentesque venenatis purus nec tellus pharetra, id interdum dui ullamcorper. Donec commodo justo sapien, et facilisis elit malesuada in.",
       link: "https://www.github.com/antoni-devlin",
+      tags: [],
     },
     {
       name: "Project 3",
       thumb: "https://picsum.photos/960/540",
       summary: "Lorem ipsum",
       link: "https://www.github.com/antoni-devlin",
+      tags: [],
     },
     {
       name: "Project 4",
       thumb: "https://picsum.photos/960/540",
       summary: "Lorem ipsum",
       link: "https://www.github.com/antoni-devlin",
+      tags: [],
     },
     {
       name: "Project 5",
@@ -33,18 +37,21 @@
       summary:
         "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut congue sodales enim. Phasellus sit amet nisl sapien.",
       link: "https://www.github.com/antoni-devlin",
+      tags: [],
     },
     {
       name: "Project 6",
       thumb: "https://picsum.photos/960/540",
       summary: "Lorem ipsum",
       link: "https://www.github.com/antoni-devlin",
+      tags: [],
     },
     {
       name: "Project 7",
       thumb: "https://picsum.photos/960/540",
       summary: "Lorem ipsum",
       link: "https://www.github.com/antoni-devlin",
+      tags: [],
     },
   ];
 </script>
@@ -58,6 +65,7 @@
       name={project.name}
       summary={project.summary}
       link={project.link}
+      tags={project.tags}
     />
   {:else}
     No projects! Check out <a

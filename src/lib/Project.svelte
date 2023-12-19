@@ -1,11 +1,18 @@
 <script>
-  export let thumb, name, summary, link;
+  export let thumb, name, summary, link, tags;
 </script>
 
 <div class="project">
   <img src={thumb} alt="" />
   <h2><a href={link}>{name}</a></h2>
   <p>{summary}.</p>
+  {#if tags}
+    <span
+      >{#each tags as tag, i (tag)}
+        {tag}{i !== tags.length - 1 ? "," : ""}
+      {/each}
+    </span>
+  {/if}
 </div>
 
 <style>

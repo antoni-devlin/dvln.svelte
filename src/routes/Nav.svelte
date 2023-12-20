@@ -14,7 +14,7 @@
 
 <nav>
   <menu>
-    {#each menuItems as link (link.id)}
+    {#each menuItems as link (menuItems.id)}
       <li><a href={link.url}>{link.linkText}</a></li>
       |
     {:else}

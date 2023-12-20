@@ -1,28 +1,82 @@
 <script>
+  import Project from "$lib/Project.svelte";
 
   let projects = [
-    { name: "Project 1", language: "Node", id: 0 },
-    { name: "Project 2", language: "Python", id: 1 },
-    { name: "Project 3", language: "Ruby", id: 2 },
+    {
+      name: "dvln.xyz",
+      thumb: "https://picsum.photos/960/540",
+      summary: "Lorem ipsum",
+      link: "https://www.github.com/antoni-devlin/dvln.svelte",
+      tags: ["Node", "Sveltekit", "CSS"],
+    },
+    {
+      name: "Whisper Notes",
+      thumb: "https://picsum.photos/960/540",
+      summary: "Lorem ipsum",
+      link: "https://github.com/antoni-devlin/whisper-notes",
+      tags: ["Python", "Javascript", "Machine Learning"],
+    },
+    {
+      name: "Link Explorer",
+      thumb: "https://picsum.photos/960/540",
+      summary: "Lorem ipsum",
+      link: "https://github.com/antoni-devlin/link-explorer",
+      tags: ["Screen Scraping", "Node"],
+    },
+    {
+      name: "QR Scanner PWA",
+      thumb: "https://picsum.photos/960/540",
+      summary: "Lorem ipsum",
+      link: "https://github.com/antoni-devlin/qr-scanner",
+      tags: ["Web API", "Javascript"],
+    },
+    {
+      name: "Paint Mixer",
+      thumb: "https://picsum.photos/960/540",
+      summary: "Lorem ipsum",
+      link: "https://github.com/antoni-devlin/paint-mixer",
+      tags: ["Javascript"],
+    },
+    {
+      name: "DoPad",
+      thumb: "https://picsum.photos/960/540",
+      summary: "Lorem ipsum",
+      link: "https://github.com/antoni-devlin/dopad",
+      tags: ["Javascript"],
+    },
+    {
+      name: "Siteimprove Bookmarklet",
+      thumb: "https://picsum.photos/960/540",
+      summary: "Lorem ipsum",
+      link: "https://github.com/antoni-devlin/si-bookmarklet",
+      tags: ["Javascript"],
+    },
   ];
-
-  for (const project of projects) {
-    project["slug"] = `${project.name.replaceAll(" ", "-").toLowerCase()}`;
-  }
 </script>
 
 <h1>Projects</h1>
 
-<ul>
-  {#each projects as project (project.id)}
-    <li>
-      <a href="/projects/{project.slug}">{project.name} ({project.language})</a>
-    </li>
+<ul class="project-list">
+  {#each projects as project}
+    <Project
+      thumb={project.thumb}
+      name={project.name}
+      summary={project.summary}
+      link={project.link}
+      tags={project.tags}
+    />
   {:else}
-    No projects!
+    No projects! Check out <a
+      href="https://https://www.github.com/antoni-devlin">my Github</a
+    >!
   {/each}
 </ul>
 
 <style>
-
+  .project-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 50px;
+  }
 </style>

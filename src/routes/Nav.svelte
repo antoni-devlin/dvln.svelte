@@ -5,7 +5,6 @@
     { linkText: "Past work", url: null, id: "2" },
     { linkText: "Projects", url: null, id: "3" },
   ];
-
   for (const item of menuItems) {
     if (item.linkText !== "Home") {
       item["url"] = `/${item.linkText.replaceAll(" ", "-").toLowerCase()}`;

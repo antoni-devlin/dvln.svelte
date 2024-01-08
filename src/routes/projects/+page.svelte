@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from "svelte";
   import Project from "$lib/Project.svelte";
 
   let projects = [
@@ -52,6 +53,21 @@
       tags: ["Javascript"],
     },
   ];
+
+  async function getProjectDescription(project) {
+    let baseUrl = project["link"];
+    let response = await fetch(baseUrl, {
+      mode: "cors", // no-cors, *cors, same-origin
+      headers: {
+        "Content-Type": "application/json",
+        "User-Agent": "antoni-devlin",
+        Accept: "application/vnd.github+json",
+      },
+    });
+    return response.json();
+  }
+
+  onMount(async () => getProjectDescription(projects[0]));
 </script>
 
 <h1>Projects</h1>

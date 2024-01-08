@@ -1,9 +1,9 @@
 <script>
   let menuItems = [
     { linkText: "Home", url: "/", id: "0" },
-    { linkText: "About", url: null, id: "1" },
-    { linkText: "Past work", url: null, id: "2" },
-    { linkText: "Projects", url: null, id: "3" },
+    { linkText: "About", id: "1" },
+    { linkText: "Past work", id: "2" },
+    { linkText: "Projects", id: "3" },
   ];
   for (const item of menuItems) {
     if (item.linkText !== "Home") {
@@ -14,7 +14,7 @@
 
 <nav>
   <menu>
-    {#each menuItems as link (menuItems.id)}
+    {#each menuItems as link}
       <li><a href={link.url}>{link.linkText}</a></li>
       |
     {:else}

@@ -3,7 +3,8 @@
   const { posts } = data;
 </script>
 
-{#each posts as post}
-  {post.title}
-  {post.body.substring(0, 15)}
-{/each}
+<ul>
+  {#each posts as post}
+    <li><a href="/posts/{post.slug}">{post.title}</a></li>
+  {/each}
+</ul>

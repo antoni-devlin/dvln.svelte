@@ -3,8 +3,7 @@
   const { posts } = data;
 </script>
 
-{#await posts}
-  Loading
-{:then posts}
-  {posts}
-{/await}
+{#each posts as post}
+  {post.title}
+  {post.body.substring(0, 15)}
+{/each}

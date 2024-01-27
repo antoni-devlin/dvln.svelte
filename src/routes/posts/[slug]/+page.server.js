@@ -1,11 +1,6 @@
-import { supabase } from "$lib/supabaseClient";
+import { supabase, getPostBySlug } from "$lib/supabaseClient";
 
-export async function load({ params }) {
-  const { data, error } = await supabase
-    .from("posts")
-    .select("*")
-    .eq("slug", params.slug);
-  return {
-    data,
-  };
-}
+export const load = ({ params }) => {
+  const data = getPostBySlug(params.slug);
+  return data;
+};

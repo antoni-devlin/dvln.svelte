@@ -5,8 +5,7 @@ export async function load({ params }) {
     .from("posts")
     .select("*")
     .eq("slug", params.slug);
-  console.log(data);
   return {
-    post: data,
+    data,
   };
 }

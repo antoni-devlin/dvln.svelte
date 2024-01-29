@@ -19,4 +19,4 @@
   <button>Save post</button>
 </form>
 
-<Tiptap />
+<Tiptap editorContent={post.body} />

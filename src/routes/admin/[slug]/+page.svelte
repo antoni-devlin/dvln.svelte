@@ -1,4 +1,5 @@
 <script>
+  import Tiptap from "$lib/Tiptap.svelte";
   export let data;
   let post = data;
 
@@ -17,3 +18,5 @@
   </label>
   <button>Save post</button>
 </form>
+
+<Tiptap />

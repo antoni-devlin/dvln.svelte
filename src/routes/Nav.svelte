@@ -5,6 +5,7 @@
     { linkText: "Past work", id: "2" },
     { linkText: "Projects", id: "3" },
     { linkText: "Posts", id: "4" },
+    { linkText: "Admin", id: "5" },
   ];
   for (const item of menuItems) {
     if (item.linkText !== "Home") {

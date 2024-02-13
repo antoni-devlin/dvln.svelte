@@ -16,3 +16,17 @@ export async function getPostBySlug(slug) {
 
   return data;
 }
+
+export async function updatePostBySlug(slug, postContent, postTitle) {
+  const { data, error } = await supabase
+    .from("posts")
+    .update({ title: postTitle, body: postContent })
+    .eq("slug", slug)
+    
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data;
+}

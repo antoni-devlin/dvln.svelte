@@ -7,7 +7,7 @@ export const load = ({ params }) => {
   return data;
 };
 
-import { fail } from "@sveltejs/kit";
+import { fail, redirect } from "@sveltejs/kit";
 
 export const actions = {
   default: async ({ request, params }) => {
@@ -22,5 +22,7 @@ export const actions = {
         body: body,
       })
       .eq("slug", params.slug);
+
+      redirect(303, '/admin');
   },
 };

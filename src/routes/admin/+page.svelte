@@ -11,8 +11,11 @@
       goto("/admin")
     }
   }
+
 </script>
 
+
+{#if posts.length > 0}
 <a href="/admin/new">New post</a>
 <table>
   <table>
@@ -44,6 +47,10 @@
     {/each}
   </table>
 </table>
+{:else}
+<p>There are no posts to show, but you can create a <a href="/admin/new">New Post</a>!</p>
+{/if}
+
 <style>
 table {
   margin: 0 auto;

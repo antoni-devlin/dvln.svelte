@@ -4,9 +4,11 @@
   import dayjs from "dayjs";
   import { supabase } from "$lib/supabaseClient";
   import { goto } from '$app/navigation';
+  
   async function deletePostBySlug(slug) {
     if (confirm("Are you sure you want to delete this post?")) {
       const { error } = await supabase.from("posts").delete().eq("slug", slug);
+      goto("/admin")
     }
   }
 </script>
@@ -17,6 +19,7 @@
     <tr>
       <th>Title</th>
       <th>Date created</th>
+      <th>Last update</th>
       <th>Actions</th>
       <th>Status</th>
     </tr>
@@ -24,6 +27,7 @@
       <tr>
         <td>{post.title}</td>
         <td>{dayjs(post.created_at).format("DD/MM/YYYY")}</td>
+        <td>{dayjs(post.updated_at).format("DD/MM/YYYY hh:mm:ss")}</td>
         <td
           ><a href="/posts/{post.slug}">View live</a> |
           <a href="/admin/{post.slug}">Edit post</a> |

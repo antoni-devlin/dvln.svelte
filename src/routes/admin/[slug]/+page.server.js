@@ -1,5 +1,5 @@
 import { supabase, getPostBySlug, updatePostBySlug } from "$lib/supabaseClient";
-
+import { getCurrentDateTime } from "$lib/dayjs.js";
 export const prerender = false;
 
 export const load = ({ params }) => {
@@ -16,12 +16,14 @@ export const actions = {
     const title = formData.get("title");
     const body = formData.get("body");
     const status = formData.get("status");
+    const updated_at = getCurrentDateTime();
     const { error } = await supabase
       .from("posts")
       .update({
         title: title,
         body: body,
         published: status,
+        updated_at: updated_at
       })
       .eq("slug", params.slug);
 

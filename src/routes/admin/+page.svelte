@@ -31,6 +31,7 @@
         <td
           ><a href="/posts/{post.slug}">View live</a> |
           <a href="/admin/{post.slug}">Edit post</a> |
+          <a data-sveltekit-reload href="/admin/" on:click={() => deletePostBySlug(post.slug)}>Delete post</a>
         </td>
         <td>
           {#if post.published}

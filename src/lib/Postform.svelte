@@ -23,13 +23,13 @@ let editor;
       theme: "snow",
       placeholder: "Write your story..."
     });
+
+    
+    quill.setContents([{ insert: body },])
+
   });
 
 </script>
-
-<div class="editor-wrapper">
-  <div bind:this={editor} />
-</div>
 
 <form method="POST" use:enhance>
     <label>
@@ -48,7 +48,10 @@ let editor;
     <label>
       Body
       <br />
-      <textarea name="body" value={body} rows="40" cols="100" />
+      <div class="editor-wrapper">
+        <div id="editor" bind:this={editor} />
+      </div>
+      <textarea hidden name="body" value={body} />
     </label>
     <br /><br />
     <button>Save post</button>

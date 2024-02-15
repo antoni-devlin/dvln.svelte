@@ -15,11 +15,13 @@ export const actions = {
 
     const title = formData.get("title");
     const body = formData.get("body");
+    const status = formData.get("status");
     const { error } = await supabase
       .from("posts")
       .update({
         title: title,
         body: body,
+        published: status,
       })
       .eq("slug", params.slug);
 

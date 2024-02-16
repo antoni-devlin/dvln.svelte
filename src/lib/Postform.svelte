@@ -1,5 +1,6 @@
 <script>
 export let title = "", body = "", status
+let quillEditor;
 import { enhance } from "$app/forms";
 import {  onMount } from 'svelte'
 
@@ -16,7 +17,7 @@ let editor;
   onMount(async () => {
 		const { default: Quill } = await import("quill");
 	
-    let quill = new Quill(editor, {
+    let quillEditor = new Quill(editor, {
       modules: {
         toolbar: toolbarOptions
       },
@@ -25,11 +26,13 @@ let editor;
     });
 
     
-    quill.setContents([{ insert: body },])
-
+    quillEditor.setContents([{ insert: body },])
   });
-
 </script>
+
+<div class="editor-wrapper">
+  <div id="editor" bind:this={editor}/>
+</div>
 
 <form method="POST" use:enhance>
     <label>
@@ -48,9 +51,6 @@ let editor;
     <label>
       Body
       <br />
-      <div class="editor-wrapper">
-        <div id="editor" bind:this={editor} />
-      </div>
       <textarea hidden name="body" value={body} />
     </label>
     <br /><br />

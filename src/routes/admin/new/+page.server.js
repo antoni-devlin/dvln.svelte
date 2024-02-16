@@ -28,7 +28,6 @@ export const actions = {
       body: body,
       slug: slug,
     });
-
     redirect(303, '/admin');
   },
 };

@@ -10,4 +10,8 @@
 
 <h2>Edit post</h2>
 
-<Postform title="{post.title}" body="{post.body}" status="{post.published ? true : false}"/>
+<Postform
+  title={post.title}
+  body={post.body}
+  status={post.published ? true : false}
+/>

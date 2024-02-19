@@ -34,10 +34,6 @@
   });
 </script>
 
-<div class="editor-wrapper">
-  <div id="editor" bind:this={editor} />
-</div>
-
 <form method="POST" use:enhance>
   <label>
     Title
@@ -53,10 +49,11 @@
     </select>
   </label>
   <br /><br />
+  <div class="editor-wrapper">
+    <div id="editor" bind:this={editor} />
+  </div>
   <label>
-    Body
-    <br />
-    <textarea name="hiddenBody" id="hiddenBody" value={body} />
+    <textarea hidden name="hiddenBody" id="hiddenBody" value={body} />
   </label>
   <br /><br />
   <button>Save post</button>

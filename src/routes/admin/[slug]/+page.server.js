@@ -22,11 +22,13 @@ export const actions = {
       .update({
         title: title,
         body: body,
-        published: status,
+        publishing_status: status,
         updated_at: updated_at,
       })
       .eq("slug", params.slug);
-
+      if (error) {
+        console.log(error)
+      }
     redirect(303, "/admin");
   },
 };

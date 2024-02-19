@@ -1,5 +1,5 @@
 <script>
-  export let title, body, status;
+  export let title = "", body = "", status;
   import { enhance } from "$app/forms";
   import { onMount } from "svelte";
 
@@ -48,8 +48,8 @@
     ><br /><br />Published status:
     <br />
     <select bind:value={status} name="status" id="status-dropdown">
-      <option value="false">Draft</option>
-      <option value="true">Published</option>
+      <option value="draft">Draft</option>
+      <option value="published">Published</option>
     </select>
   </label>
   <br /><br />

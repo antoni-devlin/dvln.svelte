@@ -13,5 +13,5 @@
 <Postform
   title={post.title}
   body={post.body}
-  status={post.published ? true : false}
+  status={post.publishing_status}
 />

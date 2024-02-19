@@ -11,7 +11,6 @@
       goto("/admin")
     }
   }
-
 </script>
 
 
@@ -37,11 +36,7 @@
           <a data-sveltekit-reload href="/admin/" on:click={() => deletePostBySlug(post.slug)}>Delete post</a>
         </td>
         <td>
-          {#if post.published}
-            Published
-            {:else}
-            Draft
-          {/if}
+          {post.publishing_status}
         </td>
       </tr>
     {/each}

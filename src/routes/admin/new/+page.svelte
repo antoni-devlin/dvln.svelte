@@ -1,5 +1,4 @@
 <script>
-  import Tiptap from "$lib/Tiptap.svelte";
   import Postform from "$lib/Postform.svelte"
 </script>
 

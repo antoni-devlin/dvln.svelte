@@ -14,7 +14,7 @@ export const actions = {
     const formData = await request.formData();
 
     const title = formData.get("title");
-    const body = formData.get("body");
+    const body = formData.get("hiddenBody");
     const status = formData.get("status");
     const updated_at = getCurrentDateTime();
     const { error } = await supabase
@@ -22,11 +22,13 @@ export const actions = {
       .update({
         title: title,
         body: body,
-        published: status,
-        updated_at: updated_at
+        publishing_status: status,
+        updated_at: updated_at,
       })
       .eq("slug", params.slug);
-
-      redirect(303, '/admin');
+      if (error) {
+        console.log(error)
+      }
+    redirect(303, "/admin");
   },
 };

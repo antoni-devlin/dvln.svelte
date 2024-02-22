@@ -33,18 +33,31 @@
     cancel();
     await goto("/");
   };
+
+  let menuItems = [
+    { linkText: "Home", url: "/", id: "0" },
+    { linkText: "About", id: "1" },
+    { linkText: "Past work", id: "2" },
+    { linkText: "Projects", id: "3" },
+    { linkText: "Posts", id: "4" },
+    { linkText: "Admin", id: "5" },
+  ];
+  for (const item of menuItems) {
+    if (item.linkText !== "Home") {
+      item["url"] = `/${item.linkText.replaceAll(" ", "-").toLowerCase()}`;
+    }
+  }
 </script>
 
 <Nav />
 
 <span id="auth_header">
-  {#if !data.session}
-    <a href="/login">login</a> / <a href="/register">signup</a>
-  {:else}
-    <a href="/user_profile">User profile</a>
+  {#if data.session}
     <form action="/logout?/logout" method="POST" use:enhance={submitLogout}>
       <button type="submit">Logout</button>
     </form>
+  {:else}
+    <a href="/login">login</a>
   {/if}
 </span>
 

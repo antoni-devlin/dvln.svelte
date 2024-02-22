@@ -1,5 +1,5 @@
 <script>
-  import Nav from "./Nav.svelte";
+  import Nav from "$lib/Nav.svelte";
 
   import { enhance } from "$app/forms";
   import { invalidate, invalidateAll, goto } from "$app/navigation";

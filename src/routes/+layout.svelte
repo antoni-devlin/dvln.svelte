@@ -1,6 +1,4 @@
 <script>
-  import Nav from "$lib/Nav.svelte";
-
   import { enhance } from "$app/forms";
   import { invalidate, invalidateAll, goto } from "$app/navigation";
   import { onMount } from "svelte";
@@ -11,16 +9,8 @@
 
   onMount(async () => {
     supabase.auth.onAuthStateChange((event, _session) => {
-      // If you want to fain grain which routes should rerun their load function
-      // when onAuthStateChange changes
-      // use invalidate('supabase:auth')
-      // which is linked to +layout.js depends('supabase:auth').
-      // This should mainly concern all routes
-      //that should be accesible only for logged in user.
-      // Otherwise use invalidateAll()
-      // which will rerun every load function of you app.
-      invalidate("supabase:auth");
-      // invalidateAll();
+      // invalidate("supabase:auth");
+      invalidateAll();
     });
     return () => subscription.unsubscribe();
   });
@@ -40,16 +30,31 @@
     { linkText: "Past work", id: "2" },
     { linkText: "Projects", id: "3" },
     { linkText: "Posts", id: "4" },
-    { linkText: "Admin", id: "5" },
   ];
+
+  if (data.session) {
+    menuItems.push({ linkText: "Admin", id: "5" })
+    
+  }
+
   for (const item of menuItems) {
     if (item.linkText !== "Home") {
       item["url"] = `/${item.linkText.replaceAll(" ", "-").toLowerCase()}`;
     }
   }
+
 </script>
 
-<Nav />
+<nav>
+  <menu>
+    {#each menuItems as link}
+      <li><a href={link.url}>{link.linkText}</a></li>
+      |
+    {:else}
+      No links!
+    {/each}
+  </menu>
+</nav>
 
 <span id="auth_header">
   {#if data.session}
@@ -69,5 +74,27 @@
   }
   form {
     display: inline;
+  }
+  li a {
+    text-decoration: none;
+  }
+
+  menu {
+    list-style: none;
+  }
+
+  li {
+    display: inline-block;
+    /* padding: 15px; */
+    color: black;
+  }
+
+  a {
+    padding: 15px;
+  }
+
+  a:hover {
+    color: white;
+    background: black;
   }
 </style>

@@ -34,7 +34,8 @@
 
   if (data.session) {
     menuItems.push({ linkText: "Admin", id: "5" })
-    
+  } else {
+    menuItems.push({ linkText: "Login", id: "6"})
   }
 
   for (const item of menuItems) {
@@ -58,11 +59,10 @@
 
 <span id="auth_header">
   {#if data.session}
-    <form action="/logout?/logout" method="POST" use:enhance={submitLogout}>
+    <form action="/logout" method="POST" use:enhance={submitLogout}>
       <button type="submit">Logout</button>
     </form>
   {:else}
-    <a href="/login">login</a>
   {/if}
 </span>
 

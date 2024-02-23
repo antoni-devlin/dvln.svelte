@@ -1,5 +1,7 @@
 import { redirect } from "@sveltejs/kit";
 
+export const prerender = false;
+
 export const actions = {
   default: async ({ locals }) => {
     await locals.supabase.auth.signOut();

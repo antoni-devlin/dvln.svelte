@@ -1,6 +1,8 @@
 import { fail, redirect } from "@sveltejs/kit";
 import { AuthApiError } from "@supabase/supabase-js";
 
+export const prerender = false;
+
 export const actions = {
   login: async (event) => {
     const { request, url, locals } = event;

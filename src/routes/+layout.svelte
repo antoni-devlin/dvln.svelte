@@ -54,17 +54,15 @@
     {:else}
       No links!
     {/each}
-  </menu>
-</nav>
-
-<span id="auth_header">
-  {#if data.session}
+    {#if data.session}
+    <span id="auth_header">
     <form action="/logout" method="POST" use:enhance={submitLogout}>
       <button type="submit">Logout</button>
     </form>
-  {:else}
+  </span>
   {/if}
-</span>
+  </menu>
+</nav>
 
 <slot />
 

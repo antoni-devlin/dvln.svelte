@@ -55,9 +55,9 @@
       No links!
     {/each}
     {#if data.session}
-    <span id="auth_header">
+    <span id="logout">
     <form action="/logout" method="POST" use:enhance={submitLogout}>
-      <button type="submit">Logout</button>
+      <button class="btn btn-secondary" type="submit">Logout</button>
     </form>
   </span>
   {/if}
@@ -67,14 +67,13 @@
 <slot />
 
 <style>
-  #auth_header {
+  #logout {
     float: right;
   }
-  form {
-    display: inline;
-  }
+
   li a {
     text-decoration: none;
+    color: black
   }
 
   menu {

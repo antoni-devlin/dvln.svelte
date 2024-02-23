@@ -12,56 +12,33 @@
     }
   }
 </script>
-
-
-
-<div class="container">
-  <a class="btn btn-primary" href="/admin/new">New post</a>
-    <div class="mx-auto">
-      <div class="card" style="width: 50vw;">
-        {#if posts.length > 0}
-  <table class="table">
-    <table>
-      <thead class="thead-dark">
+<a class="btn btn-primary" href="/admin/new">New post</a>
+{#if posts.length > 0}
+<table class="table table-striped">
+  <thead class="">
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Date created</th>
+      <th scope="col">Last update</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {#each posts as post}
         <tr>
-          <th>Title</th>
-          <th>Date created</th>
-          <th>Last update</th>
-          <th>Actions</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      
-      {#each posts as post}
-        <tr>
-          <td>{post.title}</td>
+          <td><a href="/admin/{post.slug}">{post.title}</a> {#if post.publishing_status == 'draft'}<span class="badge bg-secondary">Draft</span>{:else if post.publishing_status == 'published'}<span class="badge bg-success">Published</span>{/if}</td>
           <td>{dayjs(post.created_at).format("DD/MM/YYYY")}</td>
           <td>{dayjs(post.updated_at).format("DD/MM/YYYY hh:mm:ss")}</td>
-          <td
-            ><a href="/posts/{post.slug}">View live</a> |
-            <a href="/admin/{post.slug}">Edit post</a> |
-            <a data-sveltekit-reload href="/admin/" on:click={() => deletePostBySlug(post.slug)}>Delete post</a>
-          </td>
           <td>
-            {post.publishing_status}
+            <a class="btn btn-danger" role='button' href="/admin/" on:click={() => deletePostBySlug(post.slug)}>Delete</a>
           </td>
         </tr>
       {/each}
-    </table>
-  </table>
-
+  </tbody>
+</table>
 {:else}
 <p>There are no posts to show, but you can create a <a href="/admin/new">New Post</a>!</p>
 {/if}
-      </div>
-    </div>
-  </div>
-
 
 <style>
-
-table {
-  /* margin: 0 auto; */
-}
-
 </style>

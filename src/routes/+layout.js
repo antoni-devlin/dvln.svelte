@@ -39,4 +39,4 @@ export const load = async ({ fetch, data, depends }) => {
   return { supabase, session };
 };
 
-export const prerender = true;
+export const prerender = false;

@@ -1,17 +1,27 @@
-import adapter from "@sveltejs/adapter-auto";
-import node from '@sveltejs/adapter-node';
+// import adapter from "@sveltejs/adapter-auto";
+import adapter from "@sveltejs/adapter-cloudflare";
+// import node from "@sveltejs/adapter-node";
+
+// const config = {
+// 	kit: {
+// 		adapter: node()
+// 	}
+// };
 
 const config = {
-	kit: {
-		adapter: node()
-	}
+  kit: {
+    adapter: adapter(),
+    // ... truncated ...
+  },
 };
 
 // const config = {
-//   kit: { adapter: adapter(),
+//   kit: {
+//     adapter: adapter(),
 //     csrf: {
-//       checkOrigin: false
-// } },
+//       checkOrigin: false,
+//     },
+//   },
 // };
 
 export default config;

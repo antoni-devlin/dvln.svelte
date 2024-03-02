@@ -2,6 +2,7 @@
   import { enhance } from "$app/forms";
   import { invalidate, invalidateAll, goto } from "$app/navigation";
   import { onMount } from "svelte";
+  import { PUBLIC_ENV } from "$env/static/public";
 
   export let data;
 
@@ -33,9 +34,9 @@
   ];
 
   if (data.session) {
-    menuItems.push({ linkText: "Admin", id: "5" })
+    menuItems.push({ linkText: "Admin", id: "5" });
   } else {
-    menuItems.push({ linkText: "Login", id: "6"})
+    menuItems.push({ linkText: "Login", id: "6" });
   }
 
   for (const item of menuItems) {
@@ -43,9 +44,11 @@
       item["url"] = `/${item.linkText.replaceAll(" ", "-").toLowerCase()}`;
     }
   }
-
 </script>
 
+{#if PUBLIC_ENV === "DEV"}
+  <span id="dev-tag"> DEVELOPMENT PREVIEW </span>
+{/if}
 <nav>
   <menu>
     {#each menuItems as link}
@@ -55,12 +58,12 @@
       No links!
     {/each}
     {#if data.session}
-    <span id="logout">
-    <form action="/logout" method="POST" use:enhance={submitLogout}>
-      <button class="btn btn-secondary" type="submit">Logout</button>
-    </form>
-  </span>
-  {/if}
+      <span id="logout">
+        <form action="/logout" method="POST" use:enhance={submitLogout}>
+          <button class="btn btn-secondary" type="submit">Logout</button>
+        </form>
+      </span>
+    {/if}
   </menu>
 </nav>
 
@@ -71,9 +74,17 @@
     float: right;
   }
 
+  #dev-tag {
+    background: orange;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: 900;
+  }
+
   li a {
     text-decoration: none;
-    color: black
+    color: black;
   }
 
   menu {

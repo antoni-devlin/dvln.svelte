@@ -2,6 +2,7 @@
   import { enhance } from "$app/forms";
   import { invalidate, invalidateAll, goto } from "$app/navigation";
   import { onMount } from "svelte";
+  import { PUBLIC_ENV } from "$env/static/public";
 
   export let data;
 
@@ -43,6 +44,9 @@
   }
 </script>
 
+{#if PUBLIC_ENV === "DEV"}
+  <span id="dev-tag"> DEVELOPMENT PREVIEW </span>
+{/if}
 <nav>
   <menu>
     {#each menuItems as link}
@@ -68,6 +72,14 @@
 <style>
   #logout {
     float: right;
+  }
+
+  #dev-tag {
+    background: orange;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: 900;
   }
 
   li a {

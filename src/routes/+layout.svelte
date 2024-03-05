@@ -61,7 +61,9 @@
   </menu>
 </nav>
 
-<slot />
+<div class="container">
+  <slot />
+</div>
 
 <style>
   #logout {

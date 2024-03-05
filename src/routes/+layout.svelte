@@ -26,16 +26,14 @@
 
   let menuItems = [
     { linkText: "Home", url: "/", id: "0" },
-    { linkText: "About", id: "1" },
-    { linkText: "Past work", id: "2" },
-    { linkText: "Projects", id: "3" },
-    { linkText: "Posts", id: "4" },
+    { linkText: "Projects", id: "1" },
+    { linkText: "Posts", id: "2" },
   ];
 
   if (data.session) {
-    menuItems.push({ linkText: "Admin", id: "5" })
+    menuItems.push({ linkText: "Admin", id: "3" });
   } else {
-    menuItems.push({ linkText: "Login", id: "6"})
+    menuItems.push({ linkText: "Login", id: "4" });
   }
 
   for (const item of menuItems) {
@@ -43,7 +41,6 @@
       item["url"] = `/${item.linkText.replaceAll(" ", "-").toLowerCase()}`;
     }
   }
-
 </script>
 
 <nav>
@@ -55,12 +52,12 @@
       No links!
     {/each}
     {#if data.session}
-    <span id="logout">
-    <form action="/logout" method="POST" use:enhance={submitLogout}>
-      <button class="btn btn-secondary" type="submit">Logout</button>
-    </form>
-  </span>
-  {/if}
+      <span id="logout">
+        <form action="/logout" method="POST" use:enhance={submitLogout}>
+          <button class="btn btn-secondary" type="submit">Logout</button>
+        </form>
+      </span>
+    {/if}
   </menu>
 </nav>
 
@@ -73,7 +70,7 @@
 
   li a {
     text-decoration: none;
-    color: black
+    color: black;
   }
 
   menu {

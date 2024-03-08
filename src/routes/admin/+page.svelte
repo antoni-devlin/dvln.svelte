@@ -8,7 +8,10 @@
     if (
       confirm(`Are you sure you want to delete the post with slug ${slug}?`)
     ) {
-      const { error } = await supabase.from("posts").delete().eq("slug", slug);
+      const { error } = await supabase
+        .from("posts")
+        .update({ publishing_status: "deleted" })
+        .eq("slug", slug);
       if (!error) {
         posts = posts.filter((post) => post.slug !== slug);
       }

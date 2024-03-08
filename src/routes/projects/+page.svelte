@@ -55,7 +55,6 @@
 </script>
 
 <h1>Projects</h1>
-
 <ul class="project-list">
   {#each projects as project}
     <Project

@@ -6,7 +6,7 @@
 
   export let data;
 
-  $: ({ supabase } = data);
+  $: ({ supabase, session } = data);
 
   onMount(async () => {
     supabase.auth.onAuthStateChange((event, _session) => {
@@ -24,24 +24,39 @@
     cancel();
     await goto("/");
   };
+  // leaving this here to discuss with Hugh
+  // let menuItems = [
+  //   { linkText: "Home", url: "/", id: "0" },
+  //   { linkText: "Projects", id: "1" },
+  //   { linkText: "Posts", id: "2" },
+  // ];
 
-  let menuItems = [
+  // if (data.session) {
+  //   menuItems.push({ linkText: "Admin", id: "3" });
+  // } else {
+  //   menuItems.push({ linkText: "Login", id: "4" });
+  // }
+
+  // for (const item of menuItems) {
+  //   if (item.linkText !== "Home") {
+  //     item["url"] = `/${item.linkText.replaceAll(" ", "-").toLowerCase()}`;
+  //   }
+  // }
+
+  $: menuItems = [
     { linkText: "Home", url: "/", id: "0" },
     { linkText: "Projects", id: "1" },
     { linkText: "Posts", id: "2" },
-  ];
-
-  if (data.session) {
-    menuItems.push({ linkText: "Admin", id: "3" });
-  } else {
-    menuItems.push({ linkText: "Login", id: "4" });
-  }
-
-  for (const item of menuItems) {
-    if (item.linkText !== "Home") {
-      item["url"] = `/${item.linkText.replaceAll(" ", "-").toLowerCase()}`;
-    }
-  }
+    ...(session
+      ? [{ linkText: "Admin", id: "3" }]
+      : [{ linkText: "Login", id: "4" }]),
+  ].map((item) => ({
+    ...item,
+    url:
+      item.linkText !== "Home"
+        ? `/${item.linkText.replaceAll(" ", "-").toLowerCase()}`
+        : item.url,
+  }));
 </script>
 
 {#if PUBLIC_ENV === "DEV"}

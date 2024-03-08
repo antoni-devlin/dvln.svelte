@@ -1,14 +1,17 @@
 <script>
   export let data;
-  const { posts } = data;
+  let { posts } = data;
   import dayjs from "dayjs";
   import { supabase } from "$lib/supabaseClient";
-  import { goto } from '$app/navigation';
-  
+
   async function deletePostBySlug(slug) {
-    if (confirm("Are you sure you want to delete this post?")) {
+    if (
+      confirm(`Are you sure you want to delete the post with slug ${slug}?`)
+    ) {
       const { error } = await supabase.from("posts").delete().eq("slug", slug);
-      goto("/admin")
+      if (!error) {
+        posts = posts.filter((post) => post.slug !== slug);
+      }
     }
   }
 </script>

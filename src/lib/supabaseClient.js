@@ -8,6 +8,7 @@ export async function getPostBySlug(slug) {
     .from("posts")
     .select()
     .eq("slug", slug)
+    .neq("publishing_status", "deleted")
     .single();
 
   if (error) {
@@ -21,8 +22,8 @@ export async function updatePostBySlug(slug, postContent, postTitle) {
   const { data, error } = await supabase
     .from("posts")
     .update({ title: postTitle, body: postContent })
-    .eq("slug", slug)
-    
+    .neq("publishing_status", "deleted")
+    .eq("slug", slug);
 
   if (error) {
     throw new Error(error.message);

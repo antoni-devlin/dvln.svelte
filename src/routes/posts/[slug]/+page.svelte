@@ -6,6 +6,8 @@
   post.created_at = dayjs(post.created_at).format("DD/MM/YYYY");
 </script>
 
-<h1>{post.title}</h1>
-<span>Posted: {post.created_at}</span>
-<p>{@html post.body}</p>
+<div class="container w-90 mt-5">
+  <h2 class="display-2">{post.title}</h2>
+  <small class="text-body-secondary">{post.created_at}</small>
+  <p class="pt-1">{@html post.body}</p>
+</div>

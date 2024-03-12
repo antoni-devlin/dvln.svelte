@@ -3,8 +3,15 @@
   const { posts } = data;
 </script>
 
-<ul>
+<div class="container mt-5">
   {#each posts as post}
-    <li><a href="/posts/{post.slug}">{post.title}</a></li>
+    <div class="post w-80 p-10">
+      <h2>{post.title}</h2>
+      <a href="/posts/{post.slug}">Read more</a>
+      <hr />
+    </div>
   {/each}
-</ul>
+</div>
+
+<style>
+</style>

@@ -3,7 +3,7 @@
   export let form;
 </script>
 
-<div class="container-fluid w-25">
+<div class="container-fluid w-50">
   <h2>Log in</h2>
   <form action="?/login" method="POST" use:enhance>
     <div class="form-floating mb-3">

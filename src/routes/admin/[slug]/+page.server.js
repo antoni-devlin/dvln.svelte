@@ -1,7 +1,6 @@
 import { supabase, getPostBySlug, updatePostBySlug } from "$lib/supabaseClient";
 import { getCurrentDateTime } from "$lib/dayjs.js";
 export const prerender = false;
-
 export const load = ({ params }) => {
   const data = getPostBySlug(params.slug);
   return data;
@@ -26,9 +25,9 @@ export const actions = {
         updated_at: updated_at,
       })
       .eq("slug", params.slug);
-      if (error) {
-        console.log(error)
-      }
+    if (error) {
+      console.log(error);
+    }
     redirect(303, "/admin");
   },
 };

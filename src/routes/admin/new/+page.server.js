@@ -1,12 +1,6 @@
 import { supabase } from "$lib/supabaseClient";
 
 export const prerender = false;
-
-
-
-
-
-
 import { fail, redirect } from "@sveltejs/kit";
 
 export const actions = {
@@ -20,17 +14,17 @@ export const actions = {
       .replaceAll(" ", "-")
       .toLowerCase();
     const body = formData.get("hiddenBody");
-    const status = formData.get("status")
+    const status = formData.get("status");
 
     const { error } = await supabase.from("posts").insert({
       title: title,
       body: body,
       slug: slug,
-      publishing_status: status
+      publishing_status: status,
     });
     if (error) {
-      console.log(error)
+      console.log(error);
     }
-    redirect(303, '/admin');
+    redirect(303, "/admin");
   },
 };

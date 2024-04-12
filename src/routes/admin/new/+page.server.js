@@ -13,6 +13,24 @@ export const actions = {
       .replace(/\s+/g, " ")
       .replaceAll(" ", "-")
       .toLowerCase();
+
+    // const { error: preInsertCheckError } = await supabase
+    //   .from("posts")
+    //   .select()
+    //   .eq("slug", slug);
+    // if (!preInsertCheckError) {
+    //   return fail(400, { slug, testing: true });
+    // }
+
+    const { count } = await supabase
+      .from("posts")
+      .select("*", { count: "exact", head: true })
+      .eq("slug", slug);
+
+    if (count) {
+      return fail(400, { slug, slugExists: true });
+    }
+
     const body = formData.get("hiddenBody");
     const status = formData.get("status");
 

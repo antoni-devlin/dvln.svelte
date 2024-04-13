@@ -1,5 +1,7 @@
 <script>
-  export let title = "", body = "", status;
+  export let title = "",
+    body = "",
+    status;
   import { enhance } from "$app/forms";
   import { onMount } from "svelte";
 
@@ -35,14 +37,26 @@
 </script>
 
 <form method="POST" use:enhance>
-
   <div class="form-floating m-3">
-    <input type="text" class="form-control form-control-lg" id="name" name="title" value={title} placeholder="titlehere">
+    <input
+      type="text"
+      class="form-control form-control-lg"
+      id="name"
+      name="title"
+      value={title}
+      placeholder="titlehere"
+    />
     <label for="name" class="form-label">Title</label>
   </div>
   <div class="m-3">
     <label for="status" class="form-label">Publishing status</label>
-    <select bind:value={status} name="status" id="status-dropdown" class="form-select form-select-sm" aria-label="{status}">
+    <select
+      bind:value={status}
+      name="status"
+      id="status-dropdown"
+      class="form-select form-select-sm"
+      aria-label={status}
+    >
       <option value="draft">Draft</option>
       <option value="published">Published</option>
     </select>

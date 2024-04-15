@@ -2,10 +2,11 @@
   import { enhance } from "$app/forms";
   import { invalidate, invalidateAll, goto } from "$app/navigation";
   import { onMount } from "svelte";
+  import { PUBLIC_ENV } from "$env/static/public";
 
   export let data;
 
-  $: ({ supabase } = data);
+  $: ({ supabase, session } = data);
 
   onMount(async () => {
     supabase.auth.onAuthStateChange((event, _session) => {
@@ -23,29 +24,51 @@
     cancel();
     await goto("/");
   };
+  // leaving this here to discuss with Hugh
+  // let menuItems = [
+  //   { linkText: "Home", url: "/", id: "0" },
+  //   { linkText: "Projects", id: "1" },
+  //   { linkText: "Posts", id: "2" },
+  // ];
 
-  let menuItems = [
+  // if (data.session) {
+  //   menuItems.push({ linkText: "Admin", id: "3" });
+  // } else {
+  //   menuItems.push({ linkText: "Login", id: "4" });
+  // }
+
+  // for (const item of menuItems) {
+  //   if (item.linkText !== "Home") {
+  //     item["url"] = `/${item.linkText.replaceAll(" ", "-").toLowerCase()}`;
+  //   }
+  // }
+
+  $: menuItems = [
     { linkText: "Home", url: "/", id: "0" },
-    { linkText: "About", id: "1" },
-    { linkText: "Past work", id: "2" },
-    { linkText: "Projects", id: "3" },
-    { linkText: "Posts", id: "4" },
-  ];
-
-  if (data.session) {
-    menuItems.push({ linkText: "Admin", id: "5" })
-  } else {
-    menuItems.push({ linkText: "Login", id: "6"})
-  }
-
-  for (const item of menuItems) {
-    if (item.linkText !== "Home") {
-      item["url"] = `/${item.linkText.replaceAll(" ", "-").toLowerCase()}`;
-    }
-  }
-
+    { linkText: "Projects", id: "1" },
+    { linkText: "Posts", id: "2" },
+    ...(session
+      ? [{ linkText: "Admin", id: "3" }]
+      : [{ linkText: "Login", id: "4" }]),
+  ].map((item) => ({
+    ...item,
+    url:
+      item.linkText !== "Home"
+        ? `/${item.linkText.replaceAll(" ", "-").toLowerCase()}`
+        : item.url,
+  }));
 </script>
 
+<svelte:head>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+  />
+</svelte:head>
+
+{#if PUBLIC_ENV === "DEV"}
+  <span id="dev-tag"> DEVELOPMENT PREVIEW </span>
+{/if}
 <nav>
   <menu>
     {#each menuItems as link}
@@ -55,25 +78,35 @@
       No links!
     {/each}
     {#if data.session}
-    <span id="logout">
-    <form action="/logout" method="POST" use:enhance={submitLogout}>
-      <button class="btn btn-secondary" type="submit">Logout</button>
-    </form>
-  </span>
-  {/if}
+      <span id="logout">
+        <form action="/logout" method="POST" use:enhance={submitLogout}>
+          <button class="btn btn-secondary" type="submit">Logout</button>
+        </form>
+      </span>
+    {/if}
   </menu>
 </nav>
 
-<slot />
+<div class="container">
+  <slot />
+</div>
 
 <style>
   #logout {
     float: right;
   }
 
+  #dev-tag {
+    background: orange;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: 900;
+  }
+
   li a {
     text-decoration: none;
-    color: black
+    color: black;
   }
 
   menu {

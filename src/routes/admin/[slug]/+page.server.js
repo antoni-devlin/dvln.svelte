@@ -1,11 +1,15 @@
 import { supabase, getPostBySlug, updatePostBySlug } from "$lib/supabaseClient";
 import { getCurrentDateTime } from "$lib/dayjs.js";
 export const prerender = false;
-
 export const load = ({ params }) => {
   const data = getPostBySlug(params.slug);
   return data;
 };
+
+import { PUBLIC_ENV } from "$env/static/public";
+let table;
+
+PUBLIC_ENV === "DEV" ? (table = "dev_posts") : (table = "posts");
 
 import { fail, redirect } from "@sveltejs/kit";
 
@@ -18,7 +22,7 @@ export const actions = {
     const status = formData.get("status");
     const updated_at = getCurrentDateTime();
     const { error } = await supabase
-      .from("posts")
+      .from(table)
       .update({
         title: title,
         body: body,
@@ -26,9 +30,9 @@ export const actions = {
         updated_at: updated_at,
       })
       .eq("slug", params.slug);
-      if (error) {
-        console.log(error)
-      }
+    if (error) {
+      console.log(error);
+    }
     redirect(303, "/admin");
   },
 };

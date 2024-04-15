@@ -2,6 +2,10 @@ import { supabase } from "$lib/supabaseClient";
 
 export const prerender = false;
 import { fail, redirect } from "@sveltejs/kit";
+import { PUBLIC_ENV } from "$env/static/public";
+let table;
+
+PUBLIC_ENV === "DEV" ? (table = "dev_posts") : (table = "posts");
 
 export const actions = {
   default: async ({ request }) => {
@@ -23,7 +27,7 @@ export const actions = {
     // }
 
     const { count } = await supabase
-      .from("posts")
+      .from(table)
       .select("*", { count: "exact", head: true })
       .eq("slug", slug);
 
@@ -34,7 +38,7 @@ export const actions = {
     const body = formData.get("hiddenBody");
     const status = formData.get("status");
 
-    const { error } = await supabase.from("posts").insert({
+    const { error } = await supabase.from(table).insert({
       title: title,
       body: body,
       slug: slug,

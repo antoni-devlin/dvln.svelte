@@ -1,5 +1,9 @@
 import { supabase } from "$lib/supabaseClient";
 import { error, redirect } from "@sveltejs/kit";
+import { PUBLIC_ENV } from "$env/static/public";
+let table;
+
+PUBLIC_ENV === "DEV" ? (table = "dev_posts") : (table = "posts");
 
 export const prerender = false;
 
@@ -10,7 +14,7 @@ export async function load({ locals: { getSession } }) {
     // redirect(303, "/")
   } else {
     const { data } = await supabase
-      .from("posts")
+      .from(table)
       .select()
       .neq("publishing_status", "deleted");
     return {

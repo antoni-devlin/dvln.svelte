@@ -6,6 +6,11 @@ export const load = ({ params }) => {
   return data;
 };
 
+import { PUBLIC_ENV } from "$env/static/public";
+let table;
+
+PUBLIC_ENV === "DEV" ? (table = "dev_posts") : (table = "posts");
+
 import { fail, redirect } from "@sveltejs/kit";
 
 export const actions = {
@@ -17,7 +22,7 @@ export const actions = {
     const status = formData.get("status");
     const updated_at = getCurrentDateTime();
     const { error } = await supabase
-      .from("posts")
+      .from(table)
       .update({
         title: title,
         body: body,

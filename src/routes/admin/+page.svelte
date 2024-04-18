@@ -22,22 +22,23 @@
     }
   }
 </script>
+
 <a class="btn btn-primary" href="/admin/new">New post</a>
 {#if posts.length > 0}
-<table class="table table-striped">
-  <thead class="">
-    <tr>
-      <th scope="col">Title</th>
-      <th scope="col">Date created</th>
-      <th scope="col">Last update</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {#each posts as post}
+  <table class="table table-striped">
+    <thead class="">
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Date created</th>
+        <th scope="col">Last update</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {#each posts as post}
         <tr>
           <td
-            ><a href="/admin/{post.slug}">{post.title}</a>
+            ><a class="post-title" href="/admin/{post.slug}">{post.title}</a>
             {#if post.publishing_status == "draft"}<span
                 class="badge bg-secondary">Draft</span
               >{:else if post.publishing_status == "published"}<span
@@ -67,4 +68,11 @@
 {/if}
 
 <style>
+  .post-title {
+    color: rgba(0, 112, 224, 1);
+  }
+
+  .post-title:hover {
+    color: rgba(0, 112, 224, 0.5);
+  }
 </style>

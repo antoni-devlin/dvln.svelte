@@ -4,6 +4,7 @@
     status;
   import { enhance } from "$app/forms";
   import { onMount } from "svelte";
+  import Delta from "quill-delta";
 
   let editor;
 
@@ -18,6 +19,20 @@
   onMount(async () => {
     const { default: Quill } = await import("quill");
 
+    // const BlockQuote = Quill.import("formats/blockquote");
+
+    // class CustomBlockQuote extends BlockQuote {
+    //   static create(value) {
+    //     const node = super.create(value);
+    //     node.classList.add("post-blockquote");
+    //     return node;
+    //   }
+    // }
+    // CustomBlockQuote.blotName = "custom-blockquote";
+    // CustomBlockQuote.tagName = "blockquote";
+
+    // Quill.register(CustomBlockQuote, true);
+
     let quillEditor = new Quill(editor, {
       modules: {
         toolbar: toolbarOptions,
@@ -26,11 +41,17 @@
       placeholder: "Compose your post...",
     });
 
-    quillEditor.root.innerHTML = "";
-    quillEditor.clipboard.dangerouslyPasteHTML(0, body);
+    if (body) {
+      try {
+        const delta = JSON.parse(body); // Parse the existing post content from JSON
+        quillEditor.setContents(delta); // Set the parsed delta as the editor content
+      } catch (error) {
+        console.error("Error parsing post content:", error);
+      }
+    }
 
     quillEditor.on("text-change", function (delta, oldDelta, source) {
-      document.getElementById("hiddenBody").value = quillEditor.root.innerHTML;
+      body = JSON.stringify(quillEditor.getContents());
     });
   });
 </script>
@@ -42,7 +63,7 @@
       class="form-control form-control-lg"
       id="name"
       name="title"
-      value={title}
+      bind:value={title}
       placeholder="titlehere"
     />
     <label for="name" class="form-label">Title</label>

@@ -8,7 +8,7 @@
   let editor;
 
   export let toolbarOptions = [
-    [{ header: 1 }, { header: 2 }, "blockquote", "link", "image", "video"],
+    [{ header: 1 }, { header: 2 }, "blockquote", "link"],
     ["bold", "italic", "underline", "strike"],
     [{ list: "ordered" }, { list: "ordered" }],
     [{ align: [] }],
@@ -23,13 +23,12 @@
         toolbar: toolbarOptions,
       },
       theme: "snow",
-      placeholder: "Write your story...",
+      placeholder: "Compose your post...",
     });
 
-    // quillEditor.setContents([{ insert: body }]);
     quillEditor.root.innerHTML = "";
     quillEditor.clipboard.dangerouslyPasteHTML(0, body);
-    // quillEditor.setText([{ insert: body }]);
+
     quillEditor.on("text-change", function (delta, oldDelta, source) {
       document.getElementById("hiddenBody").value = quillEditor.root.innerHTML;
     });

@@ -108,12 +108,14 @@
     display: inline-block;
   }
 
-  li a {
+  a {
+    color: black;
     text-decoration: none;
-    color: black !important;
+    padding: 15px;
+    transition: color 300ms;
   }
 
-  a {
-    padding: 15px;
+  a:hover {
+    color: darkred;
   }
 </style>

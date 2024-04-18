@@ -45,11 +45,11 @@
 
   $: menuItems = [
     { linkText: "Home", url: "/", id: "0" },
-    { linkText: "Projects", id: "1" },
+    // { linkText: "Projects", id: "1" },
     { linkText: "Posts", id: "2" },
-    ...(session
-      ? [{ linkText: "Admin", id: "3" }]
-      : [{ linkText: "Login", id: "4" }]),
+    // ...(session
+    //   ? [{ linkText: "Admin", id: "3" }]
+    //   : [{ linkText: "Login", id: "4" }]),
   ].map((item) => ({
     ...item,
     url:
@@ -64,6 +64,7 @@
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
   />
+  <link rel="stylesheet" href="/styles/main.css" />
 </svelte:head>
 
 {#if PUBLIC_ENV === "DEV"}
@@ -73,7 +74,6 @@
   <menu>
     {#each menuItems as link}
       <li><a href={link.url}>{link.linkText}</a></li>
-      |
     {:else}
       No links!
     {/each}
@@ -104,27 +104,18 @@
     font-weight: 900;
   }
 
-  li a {
-    text-decoration: none;
-    color: black;
-  }
-
-  menu {
-    list-style: none;
-  }
-
   li {
     display: inline-block;
-    /* padding: 15px; */
-    color: black;
   }
 
   a {
+    color: black;
+    text-decoration: none;
     padding: 15px;
+    transition: color 300ms;
   }
 
   a:hover {
-    color: white;
-    background: black;
+    color: darkred;
   }
 </style>

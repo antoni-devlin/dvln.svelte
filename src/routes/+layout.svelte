@@ -45,11 +45,11 @@
 
   $: menuItems = [
     { linkText: "Home", url: "/", id: "0" },
-    { linkText: "Projects", id: "1" },
+    // { linkText: "Projects", id: "1" },
     { linkText: "Posts", id: "2" },
-    ...(session
-      ? [{ linkText: "Admin", id: "3" }]
-      : [{ linkText: "Login", id: "4" }]),
+    // ...(session
+    //   ? [{ linkText: "Admin", id: "3" }]
+    //   : [{ linkText: "Login", id: "4" }]),
   ].map((item) => ({
     ...item,
     url:

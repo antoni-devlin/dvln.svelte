@@ -19,19 +19,18 @@
   onMount(async () => {
     const { default: Quill } = await import("quill");
 
-    // const BlockQuote = Quill.import("formats/blockquote");
+    let Block = Quill.import("blots/block");
+    class CustomBlockQuote extends Block {
+      static create(value) {
+        let node = super.create(value);
+        node.classList.add("post-blockquote"); // Add the desired class
+        return node;
+      }
+    }
+    CustomBlockQuote.blotName = "blockquote";
+    CustomBlockQuote.tagName = "blockquote";
 
-    // class CustomBlockQuote extends BlockQuote {
-    //   static create(value) {
-    //     const node = super.create(value);
-    //     node.classList.add("post-blockquote");
-    //     return node;
-    //   }
-    // }
-    // CustomBlockQuote.blotName = "custom-blockquote";
-    // CustomBlockQuote.tagName = "blockquote";
-
-    // Quill.register(CustomBlockQuote, true);
+    Quill.register(CustomBlockQuote, true);
 
     let quillEditor = new Quill(editor, {
       modules: {

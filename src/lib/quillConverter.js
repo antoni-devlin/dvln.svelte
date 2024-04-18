@@ -1,5 +1,9 @@
 import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
-const cfg = {};
+const cfg = {
+  customCssClasses: {
+    blockquote: "post-blockquote",
+  },
+};
 
 export function convertQuill(deltaBody) {
   try {
@@ -10,10 +14,8 @@ export function convertQuill(deltaBody) {
     );
 
     const html = converter.convert();
-    console.log("is json, converting!");
     return html;
   } catch (e) {
-    console.log("not json, so no converting!");
     return deltaBody;
   }
 }

@@ -21,6 +21,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.39.3",
     "dayjs": "^1.11.10",
+    "highlight.js": "^11.9.0",
     "quill": "^2.0.0-rc.2",
     "quill-delta-to-html": "^0.12.1"
   }

@@ -7,7 +7,7 @@ a:hover {
   color: red;
 }
 
-.post-blockquote {
+blockquote {
   background: #f9f9f9;
   border-left: 10px solid #ccc;
   margin: 1.5em 10px;
@@ -15,7 +15,7 @@ a:hover {
   quotes: "\201C" "\201D" "\2018" "\2019";
 }
 
-.post-blockquote:before {
+blockquote:before {
   color: #ccc;
   content: open-quote;
   font-size: 4em;
@@ -24,6 +24,17 @@ a:hover {
   vertical-align: -0.4em;
 }
 
-.post-blockquote p {
+blockquote p {
   display: inline;
+}
+
+pre code {
+  display: block;
+  background: none;
+  white-space: pre;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: scroll;
+  max-width: 100%;
+  min-width: 100px;
+  padding: 0;
 }

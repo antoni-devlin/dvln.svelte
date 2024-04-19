@@ -4,15 +4,16 @@
     status;
   import { enhance } from "$app/forms";
   import { onMount } from "svelte";
-  import Delta from "quill-delta";
 
   let editor;
 
+  // Define your toolbar options
   export let toolbarOptions = [
-    [{ header: 1 }, { header: 2 }, "blockquote", "link"],
+    [{ header: 1 }, { header: 2 }, "blockquote", "link", "code"],
     ["bold", "italic", "underline", "strike"],
-    [{ list: "ordered" }, { list: "ordered" }],
+    [{ list: "ordered" }, { list: "bullet" }, { list: "checked" }], // List options dropdown
     [{ align: [] }],
+    [{ pre: "code-block" }], // Button for preformatted text
     ["clean"],
   ];
 
@@ -29,6 +30,24 @@
     }
     CustomBlockQuote.blotName = "blockquote";
     CustomBlockQuote.tagName = "blockquote";
+
+    // Define a custom format for <pre>
+    const CodeBlock = Quill.import("formats/code-block");
+
+    class PreFormattedText extends CodeBlock {
+      static create(value) {
+        const node = super.create(value);
+        node.setAttribute("data-language", ""); // Optionally, you can set the language attribute for syntax highlighting
+        return node;
+      }
+    }
+
+    Quill.register(PreFormattedText);
+
+    // Add an icon for the pre button
+    const icons = Quill.import("ui/icons");
+    icons["pre"] =
+      '<svg viewBox="0 0 18 18"><rect class="ql-stroke" height="12" width="14" x="2" y="3"></rect><rect class="ql-fill" height="12" width="12" x="3" y="4"></rect></svg>';
 
     Quill.register(CustomBlockQuote, true);
 

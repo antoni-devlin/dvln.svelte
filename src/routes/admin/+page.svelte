@@ -29,6 +29,7 @@
     <thead class="">
       <tr>
         <th scope="col">Title</th>
+        <th scope="col">Excerpt</th>
         <th scope="col">Date created</th>
         <th scope="col">Last update</th>
         <th scope="col">Actions</th>
@@ -45,6 +46,7 @@
                 class="badge bg-success">Published</span
               >{/if}</td
           >
+          <td>{post.excerpt}</td>
           <td>{dayjs(post.created_at).format("DD/MM/YYYY")}</td>
           <td>{dayjs(post.updated_at).format("DD/MM/YYYY hh:mm:ss")}</td>
           <td>

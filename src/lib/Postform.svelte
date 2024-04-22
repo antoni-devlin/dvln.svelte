@@ -1,7 +1,8 @@
 <script>
   export let title = "",
     body = "",
-    status;
+    status,
+    excerpt;
   import { enhance } from "$app/forms";
   import { onMount } from "svelte";
 
@@ -19,6 +20,17 @@
       placeholder="titlehere"
     />
     <label for="name" class="form-label">Title</label>
+  </div>
+  <div class="form-floating m-3">
+    <input
+      type="text"
+      class="form-control form-control-sm"
+      id="excerpt"
+      name="excerpt"
+      value={excerpt}
+      placeholder="Excerpt..."
+    />
+    <label for="name" class="form-label">Excerpt</label>
   </div>
   <div class="m-3">
     <label for="status" class="form-label">Publishing status</label>

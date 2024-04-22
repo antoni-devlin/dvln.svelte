@@ -9,4 +9,9 @@
 
 <h2>Edit post</h2>
 
-<Postform title={post.title} body={post.body} status={post.publishing_status} />
+<Postform
+  title={post.title}
+  excerpt={post.excerpt}
+  body={post.body}
+  status={post.publishing_status}
+/>

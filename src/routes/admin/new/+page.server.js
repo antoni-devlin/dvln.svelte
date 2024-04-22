@@ -35,7 +35,7 @@ export const actions = {
       return fail(400, { slug, slugExists: true });
     }
 
-    const body = formData.get("hiddenBody");
+    const body = formData.get("post-body");
     const status = formData.get("status");
 
     const { error } = await supabase.from(table).insert({

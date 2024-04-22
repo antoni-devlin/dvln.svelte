@@ -18,7 +18,7 @@ export const actions = {
     const formData = await request.formData();
 
     const title = formData.get("title");
-    const body = formData.get("hiddenBody");
+    const body = formData.get("post-body");
     const status = formData.get("status");
     const updated_at = getCurrentDateTime();
     const { error } = await supabase

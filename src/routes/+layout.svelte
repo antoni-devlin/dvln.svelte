@@ -6,6 +6,8 @@
 
   export let data;
 
+  let cf_token_string = "{'token': 'e5e954370f1b4cf184896328e3466581'}";
+
   $: ({ supabase, session } = data);
 
   onMount(async () => {
@@ -46,6 +48,14 @@
 
 {#if PUBLIC_ENV === "DEV"}
   <span id="dev-tag"> DEVELOPMENT PREVIEW </span>
+{:else}
+  <!-- Cloudflare Web Analytics -->
+  <script
+    defer
+    src="https://static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon={cf_token_string}
+  ></script>
+  <!-- End Cloudflare Web Analytics -->
 {/if}
 <nav>
   <menu>

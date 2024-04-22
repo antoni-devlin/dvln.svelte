@@ -12,6 +12,7 @@ export const actions = {
     const formData = await request.formData();
 
     const title = formData.get("title");
+    const excerpt = formData.get("excerpt");
     const slug = title
       .replace(/[^\w\s\']|_/g, "")
       .replace(/\s+/g, " ")
@@ -35,11 +36,12 @@ export const actions = {
       return fail(400, { slug, slugExists: true });
     }
 
-    const body = formData.get("hiddenBody");
+    const body = formData.get("post-body");
     const status = formData.get("status");
 
     const { error } = await supabase.from(table).insert({
       title: title,
+      excerpt: excerpt,
       body: body,
       slug: slug,
       publishing_status: status,

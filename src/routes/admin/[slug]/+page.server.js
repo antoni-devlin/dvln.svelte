@@ -18,13 +18,15 @@ export const actions = {
     const formData = await request.formData();
 
     const title = formData.get("title");
-    const body = formData.get("hiddenBody");
+    const excerpt = formData.get("excerpt");
+    const body = formData.get("post-body");
     const status = formData.get("status");
     const updated_at = getCurrentDateTime();
     const { error } = await supabase
       .from(table)
       .update({
         title: title,
+        excerpt: excerpt,
         body: body,
         publishing_status: status,
         updated_at: updated_at,

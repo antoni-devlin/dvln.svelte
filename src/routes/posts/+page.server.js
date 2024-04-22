@@ -8,7 +8,8 @@ export async function load() {
   const { data } = await supabase
     .from(table)
     .select()
-    .eq("publishing_status", "published");
+    .eq("publishing_status", "published")
+    .not("body", "is", null);
   return {
     posts: data ?? [],
   };

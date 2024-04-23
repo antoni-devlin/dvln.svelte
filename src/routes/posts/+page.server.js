@@ -9,7 +9,8 @@ export async function load() {
     .from(table)
     .select()
     .eq("publishing_status", "published")
-    .not("body", "is", null);
+    .not("body", "is", null)
+    .order("created_at", { ascending: false });
   return {
     posts: data ?? [],
   };

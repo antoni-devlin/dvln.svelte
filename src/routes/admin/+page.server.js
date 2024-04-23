@@ -16,7 +16,8 @@ export async function load({ locals: { getSession } }) {
     const { data } = await supabase
       .from(table)
       .select()
-      .neq("publishing_status", "deleted");
+      .neq("publishing_status", "deleted")
+      .order("created_at", { ascending: false });
     return {
       posts: data ?? [],
     };

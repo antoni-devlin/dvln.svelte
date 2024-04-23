@@ -3,6 +3,7 @@
   import { invalidate, invalidateAll, goto } from "$app/navigation";
   import { onMount } from "svelte";
   import { PUBLIC_ENV } from "$env/static/public";
+  import Footer from "$lib/Footer.svelte";
   export let data;
 
   let cf_token_string = "{'token': 'e5e954370f1b4cf184896328e3466581'}";
@@ -77,6 +78,20 @@
 <div class="container">
   <slot />
 </div>
+
+{#if !data.session}
+  <Footer
+    content="Built by Antoni Devlin using Sveltekit"
+    link="login"
+    linkText="Login"
+  />
+{:else}
+  <Footer
+    content="Built by Antoni Devlin using Sveltekit"
+    link="admin"
+    linkText="Admin"
+  />
+{/if}
 
 <style>
   #logout {

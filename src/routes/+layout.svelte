@@ -3,7 +3,6 @@
   import { invalidate, invalidateAll, goto } from "$app/navigation";
   import { onMount } from "svelte";
   import { PUBLIC_ENV } from "$env/static/public";
-
   export let data;
 
   let cf_token_string = "{'token': 'e5e954370f1b4cf184896328e3466581'}";
@@ -44,6 +43,7 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
   />
   <link rel="stylesheet" href="/styles/main.css" />
+  <title>DVLN.XYZ</title>
 </svelte:head>
 
 {#if PUBLIC_ENV === "DEV"}

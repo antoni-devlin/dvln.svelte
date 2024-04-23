@@ -3,6 +3,10 @@
   const { posts } = data;
 </script>
 
+<svelte:head>
+  <title>DVLN – Posts</title>
+</svelte:head>
+
 <div class="container mt-5">
   {#each posts as post}
     <div class="post w-80 p-10">

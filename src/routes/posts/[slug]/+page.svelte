@@ -14,6 +14,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>DVLN – {post.title}</title>
+</svelte:head>
+
 <div class="container w-90 mt-5">
   <h2 class="display-2">{post.title}</h2>
   <small class="text-body-secondary">{post.created_at}</small>

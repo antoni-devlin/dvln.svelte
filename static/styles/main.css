@@ -27,3 +27,9 @@ blockquote:before {
 blockquote p {
   display: inline;
 }
+
+pre {
+  font-size: .875em;
+  color: var(--bs-code-color);
+  word-wrap: break-word;
+}

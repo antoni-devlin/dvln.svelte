@@ -5,7 +5,7 @@
 <div class="container-fluid home-content w-60 text-center">
   <img
     class="w-10"
-    src="https://avatars.githubusercontent.com/u/11968957?v=4"
+    src="https://cdn.jsdelivr.net/gh/antoni-devlin/dvln.svelte/src/images/headshot.jpeg"
     alt=""
   />
   <h1 class="text-start">

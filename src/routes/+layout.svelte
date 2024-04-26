@@ -1,6 +1,6 @@
 <script>
   import { enhance } from "$app/forms";
-  import { invalidate, invalidateAll, goto } from "$app/navigation";
+  import { invalidateAll, goto } from "$app/navigation";
   import { onMount } from "svelte";
   import { PUBLIC_ENV } from "$env/static/public";
   import Footer from "$lib/Footer.svelte";

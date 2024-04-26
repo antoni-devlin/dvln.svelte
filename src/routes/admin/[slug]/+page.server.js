@@ -1,4 +1,4 @@
-import { supabase, getPostBySlug, updatePostBySlug } from "$lib/supabaseClient";
+import { supabase, getPostBySlug } from "$lib/supabaseClient";
 import { getCurrentDateTime } from "$lib/dayjs.js";
 export const prerender = false;
 export const load = ({ params }) => {

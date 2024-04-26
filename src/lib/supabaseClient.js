@@ -22,17 +22,3 @@ export async function getPostBySlug(slug) {
 
   return data;
 }
-
-export async function updatePostBySlug(slug, postContent, postTitle) {
-  const { data, error } = await supabase
-    .from(table)
-    .update({ title: postTitle, body: postContent })
-    .neq("publishing_status", "deleted")
-    .eq("slug", slug);
-
-  if (error) {
-    throw new Error(error.message);
-  }
-
-  return data;
-}

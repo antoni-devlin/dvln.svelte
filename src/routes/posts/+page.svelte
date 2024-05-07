@@ -1,12 +1,14 @@
 <script>
   export let data;
   const { posts } = data;
+  import Search from "$lib/Search.svelte";
 </script>
 
 <svelte:head>
   <title>DVLN – Posts</title>
 </svelte:head>
 
+<Search />
 <div class="container mt-5">
   {#if posts.length > 0}
     {#each posts as post}

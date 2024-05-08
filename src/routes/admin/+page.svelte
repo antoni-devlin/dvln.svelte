@@ -5,8 +5,15 @@
   import { supabase } from "$lib/supabaseClient";
   import { PUBLIC_ENV } from "$env/static/public";
   let table;
-
   PUBLIC_ENV === "DEV" ? (table = "dev_posts") : (table = "posts");
+
+  const published_posts = posts.filter(
+    (post) => post.publishing_status === "published"
+  );
+
+  const draft_posts = posts.filter(
+    (post) => post.publishing_status === "draft"
+  );
 
   async function deletePostBySlug(slug) {
     if (
@@ -24,7 +31,8 @@
 </script>
 
 <a class="btn btn-primary" href="/admin/new">New post</a>
-{#if posts.length > 0}
+{#if published_posts.length > 0}
+  <h2>Published posts</h2>
   <table class="table table-striped">
     <thead class="">
       <tr>
@@ -36,9 +44,9 @@
       </tr>
     </thead>
     <tbody>
-      {#each posts as post}
+      {#each published_posts as post}
         <tr>
-          <td
+          <td class="title-cell"
             ><a class="post-title" href="/admin/{post.slug}">{post.title}</a>
             {#if post.publishing_status == "draft"}<span
                 class="badge bg-secondary">Draft</span
@@ -46,10 +54,14 @@
                 class="badge bg-success">Published</span
               >{/if}</td
           >
-          <td>{post.excerpt}</td>
-          <td>{dayjs(post.created_at).format("DD/MM/YYYY")}</td>
-          <td>{dayjs(post.updated_at).format("DD/MM/YYYY hh:mm:ss")}</td>
-          <td>
+          <td class="excerpt-cell">{post.excerpt}</td>
+          <td class="created-cell"
+            >{dayjs(post.created_at).format("DD/MM/YYYY")}</td
+          >
+          <td class="updated-cell"
+            >{dayjs(post.updated_at).format("DD/MM/YYYY hh:mm:ss")}</td
+          >
+          <td class="actions-cell">
             <a
               class="btn btn-danger"
               role="button"
@@ -63,7 +75,56 @@
   </table>
 {:else}
   <p>
-    There are no posts to show, but you can create a <a href="/admin/new"
+    There are no published posts to show, but you can create a <a
+      href="/admin/new">New Post</a
+    >!
+  </p>
+{/if}
+{#if draft_posts.length > 0}
+  <h2>Drafts</h2>
+  <table class="table table-striped">
+    <thead class="">
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Excerpt</th>
+        <th scope="col">Date created</th>
+        <th scope="col">Last update</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {#each draft_posts as post}
+        <tr>
+          <td class="title-cell"
+            ><a class="post-title" href="/admin/{post.slug}">{post.title}</a>
+            {#if post.publishing_status == "draft"}<span
+                class="badge bg-secondary">Draft</span
+              >{:else if post.publishing_status == "published"}<span
+                class="badge bg-success">Published</span
+              >{/if}</td
+          >
+          <td class="excerpt-cell">{post.excerpt}</td>
+          <td class="created-cell"
+            >{dayjs(post.created_at).format("DD/MM/YYYY")}</td
+          >
+          <td class="updated-cell"
+            >{dayjs(post.updated_at).format("DD/MM/YYYY hh:mm:ss")}</td
+          >
+          <td class="actions-cell">
+            <a
+              class="btn btn-danger"
+              role="button"
+              href="/admin/"
+              on:click={() => deletePostBySlug(post.slug)}>Delete</a
+            >
+          </td>
+        </tr>
+      {/each}
+    </tbody>
+  </table>
+{:else}
+  <p>
+    There are no drafts to show, but you can create a <a href="/admin/new"
       >New Post</a
     >!
   </p>
@@ -76,5 +137,17 @@
 
   .post-title:hover {
     color: rgba(0, 112, 224, 0.5);
+  }
+
+  h2 {
+    margin-top: 40px;
+  }
+
+  .title-cell {
+    width: 15vw;
+  }
+
+  .excerpt-cell {
+    width: 40vw;
   }
 </style>

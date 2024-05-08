@@ -7,6 +7,13 @@
   let table;
 
   PUBLIC_ENV === "DEV" ? (table = "dev_posts") : (table = "posts");
+  const published_posts = posts.filter(
+    (post) => post.publishing_status === "published"
+  );
+
+  const draft_posts = posts.filter(
+    (post) => post.publishing_status === "draft"
+  );
 
   async function deletePostBySlug(slug) {
     if (

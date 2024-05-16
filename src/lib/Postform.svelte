@@ -3,6 +3,8 @@
     body = "",
     status,
     excerpt = "";
+  let loading = false;
+  let tooShort = false;
   import { enhance } from "$app/forms";
   import { onMount } from "svelte";
 

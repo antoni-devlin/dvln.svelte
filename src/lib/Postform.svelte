@@ -2,7 +2,7 @@
   export let title = "",
     body = "",
     status,
-    excerpt;
+    excerpt = "";
   import { enhance } from "$app/forms";
   import { onMount } from "svelte";
 

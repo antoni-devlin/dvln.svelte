@@ -59,16 +59,29 @@
     />
     <label for="name" class="form-label">Title</label>
   </div>
-  <div class="form-floating m-3">
-    <input
-      type="text"
-      class="form-control form-control-sm"
-      id="excerpt"
-      name="excerpt"
-      value={excerpt}
-      placeholder="Excerpt..."
-    />
-    <label for="name" class="form-label">Excerpt</label>
+  <div class="input-group m-3">
+    <!-- Input field -->
+    <div class="form-floating">
+      <input
+        type="text"
+        class="form-control"
+        id="excerpt"
+        name="excerpt"
+        value={excerpt}
+        placeholder="Excerpt..."
+      />
+      <label for="excerpt" class="form-label">Excerpt</label>
+    </div>
+
+    <!-- Button -->
+      <button
+        class="btn btn-outline-secondary"
+        type="button"
+        id="generate-excerpt-button"
+        on:click={generateExcerpt}
+      >
+        Generate excerpt
+      </button>
   </div>
   <div class="m-3">
     <label for="status" class="form-label">Publishing status</label>

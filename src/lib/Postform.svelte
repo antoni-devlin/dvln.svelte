@@ -2,9 +2,47 @@
   export let title = "",
     body = "",
     status,
-    excerpt;
+    excerpt = "";
+  let loading = false;
+  let tooShort = false;
   import { enhance } from "$app/forms";
   import { onMount } from "svelte";
+
+  async function generateExcerpt() {
+    const content = document.getElementById("post-body").value;
+    if (content.length < 300) {
+      tooShort = true;
+      throw new Error("Post not long enough to summarise - write more!");
+    }
+
+    try {
+      const requestBody = { userInput: content };
+      loading = true;
+      tooShort = false;
+      const response = await fetch(
+        "https://generate-excerpt.antoni-devlin.workers.dev/",
+        {
+          method: "POST", // *GET, POST, PUT, DELETE, etc.
+          mode: "cors", // no-cors, *cors, same-origin
+          cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody), // body data type must match "Content-Type" header
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json(); // Await the JSON parsing
+      excerpt = data.response; // Update excerpt variable with the response
+      return data; // parses JSON response into native JavaScript objects
+    } catch (error) {
+      console.error("Error generating excerpt:", error);
+    } finally {
+      loading = false;
+    }
+  }
 
   onMount(async () => {});
 </script>
@@ -21,17 +59,52 @@
     />
     <label for="name" class="form-label">Title</label>
   </div>
-  <div class="form-floating m-3">
-    <input
-      type="text"
-      class="form-control form-control-sm"
-      id="excerpt"
-      name="excerpt"
-      value={excerpt}
-      placeholder="Excerpt..."
-    />
-    <label for="name" class="form-label">Excerpt</label>
+  <div class="input-group m-3">
+    <!-- Input field -->
+    <div class="form-floating">
+      <input
+        type="text"
+        class="form-control"
+        id="excerpt"
+        name="excerpt"
+        value={excerpt}
+        placeholder="Excerpt..."
+      />
+      <label for="excerpt" class="form-label">Excerpt</label>
+    </div>
+
+    <!-- Button -->
+    {#if loading}
+      <button
+        class="btn btn-outline-secondary"
+        type="button"
+        id="generate-excerpt-button"
+        disabled
+      >
+        <span
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="false"
+        ></span>
+        Loading...
+      </button>
+    {:else}
+      <button
+        class="btn btn-outline-secondary"
+        type="button"
+        id="generate-excerpt-button"
+        on:click={generateExcerpt}
+      >
+        Generate excerpt
+      </button>
+    {/if}
   </div>
+  {#if tooShort}
+    <div class="alert alert-warning m-3" role="alert">
+      Post not long enough to summarise. Write more!
+    </div>
+  {/if}
+
   <div class="m-3">
     <label for="status" class="form-label">Publishing status</label>
     <select

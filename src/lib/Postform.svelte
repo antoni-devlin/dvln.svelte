@@ -74,6 +74,21 @@
     </div>
 
     <!-- Button -->
+    {#if loading}
+      <button
+        class="btn btn-outline-secondary"
+        type="button"
+        id="generate-excerpt-button"
+        disabled
+      >
+        <span
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="false"
+        ></span>
+        Loading...
+      </button>
+    {:else}
       <button
         class="btn btn-outline-secondary"
         type="button"
@@ -82,6 +97,7 @@
       >
         Generate excerpt
       </button>
+    {/if}
   </div>
   <div class="m-3">
     <label for="status" class="form-label">Publishing status</label>

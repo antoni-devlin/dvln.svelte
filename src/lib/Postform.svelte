@@ -99,6 +99,12 @@
       </button>
     {/if}
   </div>
+  {#if tooShort}
+    <div class="alert alert-warning m-3" role="alert">
+      Post not long enough to summarise. Write more!
+    </div>
+  {/if}
+
   <div class="m-3">
     <label for="status" class="form-label">Publishing status</label>
     <select

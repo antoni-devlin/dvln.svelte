@@ -8,6 +8,42 @@
   import { enhance } from "$app/forms";
   import { onMount } from "svelte";
 
+  async function generateExcerpt() {
+    const content = document.getElementById("post-body").value;
+    if (content.length < 300) {
+      tooShort = true;
+      throw new Error("Post not long enough to summarise - write more!");
+    }
+
+    try {
+      const requestBody = { userInput: content };
+      loading = true;
+      tooShort = false;
+      const response = await fetch(
+        "https://generate-excerpt.antoni-devlin.workers.dev/",
+        {
+          method: "POST", // *GET, POST, PUT, DELETE, etc.
+          mode: "cors", // no-cors, *cors, same-origin
+          cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody), // body data type must match "Content-Type" header
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json(); // Await the JSON parsing
+      excerpt = data.response; // Update excerpt variable with the response
+      return data; // parses JSON response into native JavaScript objects
+    } catch (error) {
+      console.error("Error generating excerpt:", error);
+    } finally {
+      loading = false;
+    }
+  }
+
   onMount(async () => {});
 </script>
 

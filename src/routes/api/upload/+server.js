@@ -26,11 +26,13 @@ export async function POST({ request }) {
       return json({ error: "Error uploading file" }, { status: 500 });
     }
 
-    const { publicURL } = supabase.storage
+    const { data } = supabase.storage
       .from("dvln.xyz-images")
       .getPublicUrl(fileName);
 
-    return json({ url: publicURL }, { status: 200 });
+    const publicUrl = data.publicUrl;
+
+    return json({ url: publicUrl }, { status: 200 });
   } catch (error) {
     console.error("Error handling request:", error);
     return json({ error: "Server error" }, { status: 500 });

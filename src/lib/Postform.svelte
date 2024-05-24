@@ -10,6 +10,7 @@
   let tooShort = false;
 
   import { enhance } from "$app/forms";
+
   async function uploadImage(event) {
     const file = event.target.files[0];
     if (!file) return;

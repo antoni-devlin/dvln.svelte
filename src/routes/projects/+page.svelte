@@ -59,3 +59,38 @@
     <a href="https://www.github.com">See the code on Github</a>
   </div>
 </div>
+
+<style>
+  .flex-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; /* Adjust the gap between columns as needed */
+  }
+
+  .col {
+    flex: 1 1 calc(25% - 16px); /* Ensure 4 equal columns on large screens */
+    max-width: calc(25% - 16px);
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 1200px) {
+    .col {
+      flex: 1 1 calc(33.33% - 16px); /* 3 equal columns on medium screens */
+      max-width: calc(33.33% - 16px);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .col {
+      flex: 1 1 calc(50% - 16px); /* 2 equal columns on smaller screens */
+      max-width: calc(50% - 16px);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .col {
+      flex: 1 1 100%; /* 1 equal column on the smallest screens */
+      max-width: 100%;
+    }
+  }
+</style>

@@ -28,7 +28,8 @@
 
   $: menuItems = [
     { linkText: "Home", url: "/", id: "0" },
-    { linkText: "Posts", id: "2" },
+    { linkText: "Posts", id: "1" },
+    { linkText: "Work history", id: "2" },
   ].map((item) => ({
     ...item,
     url:

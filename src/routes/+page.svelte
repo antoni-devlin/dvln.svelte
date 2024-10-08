@@ -15,7 +15,7 @@
     I write stuff, build stuff and like trying to do the most with the least.
   </h2>
   <p class="text-start">
-    I'm currently a Content Designer in the <a
+    Full stack content designer, currently in the <a
       href="https://www.gov.uk/government/organisations/government-digital-service/about"
       >Government Digital Service (GDS)</a
     >, working on <a href="https://gov.uk">GOV.UK</a>.

@@ -18,7 +18,7 @@
     Currently in the <a
       href="https://www.gov.uk/government/organisations/government-digital-service/about"
       >Government Digital Service (GDS)</a
-    >, working on <a href="https://gov.uk">GOV.UK</a>.
+    >, working on <a href="https://gov.uk">GOV.UK</a> and AI.
   </p>
 </div>
 

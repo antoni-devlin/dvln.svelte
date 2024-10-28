@@ -62,9 +62,7 @@
   <menu>
     {#each menuItems as link}
       <li>
-        <a href={link.url}
-          >{link.linkText} data-umami-event="{main_menu_click}"
-        </a>
+        <a href={link.url}>{link.linkText} " </a>
       </li>
     {:else}
       No links!

@@ -1,6 +1,6 @@
 <script>
   import { enhance } from "$app/forms";
-  export let form;
+  let { form } = $props();
 </script>
 
 <div class="container-fluid w-25">

@@ -25,13 +25,13 @@
         <td class="tg-0pky">02 April 2025</td>
       </tr>
     </tbody>
-    <p>
-      Verify registration on the <a
-        href="https://register-drones.caa.co.uk/check-a-registration/enter-registration-number"
-        >Civil Aviation Authority (CAA) website</a
-      >.
-    </p>
   </table>
+  <p>
+    Verify registration on the <a
+      href="https://register-drones.caa.co.uk/check-a-registration/enter-registration-number"
+      >Civil Aviation Authority (CAA) website</a
+    >.
+  </p>
 </div>
 
 <style>

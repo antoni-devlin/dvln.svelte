@@ -1,8 +1,8 @@
 <script>
-  export let data;
-  let post = data;
+  let post = $state(data);
   import dayjs from "dayjs";
   import Postform from "$lib/Postform.svelte";
+  let { data } = $props();
 
   post.created_at = dayjs(post.created_at).format("DD/MM/YYYY");
 </script>

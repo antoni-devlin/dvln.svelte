@@ -1,7 +1,13 @@
 <script>
-  export let content = "",
-    link = "",
-    linkText = "";
+  /**
+   * @typedef {Object} Props
+   * @property {string} [content]
+   * @property {string} [link]
+   * @property {string} [linkText]
+   */
+
+  /** @type {Props} */
+  let { content = "", link = "", linkText = "" } = $props();
 </script>
 
 <footer class="footer mt-auto py-3 bg-light">

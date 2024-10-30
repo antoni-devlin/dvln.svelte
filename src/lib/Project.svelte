@@ -1,5 +1,11 @@
 <script>
-  export let thumb, name, summary, link, tags;
+  let {
+    thumb,
+    name,
+    summary,
+    link,
+    tags
+  } = $props();
 </script>
 
 <div class="project">

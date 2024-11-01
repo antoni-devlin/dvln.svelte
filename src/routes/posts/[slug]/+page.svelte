@@ -1,8 +1,8 @@
 <script>
-  export let data;
-  let post = data;
+  let post = $state(data);
   import Markdoc from "@markdoc/markdoc";
   import dayjs from "dayjs";
+  let { data } = $props();
   post.created_at = dayjs(post.created_at).format("DD/MM/YYYY");
   function rendermd(source) {
     const config = {};

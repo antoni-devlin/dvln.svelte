@@ -4,11 +4,11 @@
   import { onMount } from "svelte";
   import { PUBLIC_ENV } from "$env/static/public";
   import Footer from "$lib/Footer.svelte";
-  export let data;
+  let { data, children } = $props();
 
   let cf_token_string = "{'token': 'e5e954370f1b4cf184896328e3466581'}";
 
-  $: ({ supabase, session } = data);
+  let { supabase, session } = $derived(data);
 
   onMount(async () => {
     supabase.auth.onAuthStateChange((event, _session) => {
@@ -26,7 +26,7 @@
     await goto("/");
   };
 
-  $: menuItems = [
+  let menuItems = $derived([
     { linkText: "Home", url: "/", id: "0" },
     { linkText: "Posts", id: "2" },
   ].map((item) => ({
@@ -35,7 +35,7 @@
       item.linkText !== "Home"
         ? `/${item.linkText.replaceAll(" ", "-").toLowerCase()}`
         : item.url,
-  }));
+  })));
 </script>
 
 <svelte:head>
@@ -76,7 +76,7 @@
 </nav>
 
 <div class="container">
-  <slot />
+  {@render children?.()}
 </div>
 
 {#if !data.session}

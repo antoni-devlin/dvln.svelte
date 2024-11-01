@@ -1,12 +1,23 @@
 <script>
-  export let title = "",
-    body = "",
-    status,
-    excerpt = "";
-  let loading = false;
-  let tooShort = false;
+  let loading = $state(false);
+  let tooShort = $state(false);
   import { enhance } from "$app/forms";
   import { onMount } from "svelte";
+  /**
+   * @typedef {Object} Props
+   * @property {string} [title]
+   * @property {string} [body]
+   * @property {any} status
+   * @property {string} [excerpt]
+   */
+
+  /** @type {Props} */
+  let {
+    title = "",
+    body = "",
+    status = $bindable(),
+    excerpt = $bindable("")
+  } = $props();
 
   async function generateExcerpt() {
     const content = document.getElementById("post-body").value;
@@ -93,7 +104,7 @@
         class="btn btn-outline-secondary"
         type="button"
         id="generate-excerpt-button"
-        on:click={generateExcerpt}
+        onclick={generateExcerpt}
       >
         Generate excerpt
       </button>

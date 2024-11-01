@@ -1,9 +1,9 @@
 <script>
-  export let data;
   let { posts } = data;
   import dayjs from "dayjs";
   import { supabase } from "$lib/supabaseClient";
   import { PUBLIC_ENV } from "$env/static/public";
+  let { data } = $props();
   let table;
   PUBLIC_ENV === "DEV" ? (table = "dev_posts") : (table = "posts");
 
@@ -66,7 +66,7 @@
               class="btn btn-danger"
               role="button"
               href="/admin/"
-              on:click={() => deletePostBySlug(post.slug)}>Delete</a
+              onclick={() => deletePostBySlug(post.slug)}>Delete</a
             >
           </td>
         </tr>
@@ -115,7 +115,7 @@
               class="btn btn-danger"
               role="button"
               href="/admin/"
-              on:click={() => deletePostBySlug(post.slug)}>Delete</a
+              onclick={() => deletePostBySlug(post.slug)}>Delete</a
             >
           </td>
         </tr>

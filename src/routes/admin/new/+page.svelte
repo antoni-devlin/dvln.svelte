@@ -1,6 +1,6 @@
 <script>
   import Postform from "$lib/Postform.svelte";
-  export let form;
+  let { form } = $props();
 </script>
 
 <h2>Create new post</h2>

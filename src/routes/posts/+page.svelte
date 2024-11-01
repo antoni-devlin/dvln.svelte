@@ -15,7 +15,7 @@
       <div class="post w-80 p-10">
         <h2>{post.title}</h2>
         <p>{post.excerpt}</p>
-        <a href="/posts/{post.slug}" data-umami-event={blog_post_read_more}
+        <a href="/posts/{post.slug}" data-umami-event="blog_post_read_more"
           >Read more</a
         >
         <hr />

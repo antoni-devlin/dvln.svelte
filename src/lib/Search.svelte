@@ -16,7 +16,7 @@
         <button
           class="btn btn-outline-secondary"
           type="submit"
-          data-umami-event={site_search}>Search</button
+          data-umami-event="site_search">Search</button
         >
       </div>
     </div>

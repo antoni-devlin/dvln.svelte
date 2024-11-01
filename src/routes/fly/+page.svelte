@@ -27,11 +27,12 @@
     </tbody>
   </table>
   <p>
-    Verify registration on the <a
-      href="https://register-drones.caa.co.uk/check-a-registration/enter-registration-number"
-      >Civil Aviation Authority (CAA) website</a
-    >.
-  </p>
+      Verify registration on the <a
+        href="https://register-drones.caa.co.uk/check-a-registration/enter-registration-number"
+        data-umami-event="drone_registration_check"
+        >Civil Aviation Authority (CAA) website</a
+      >.
+    </p>
 </div>
 
 <style>

@@ -49,19 +49,15 @@
 
 {#if PUBLIC_ENV === "DEV"}
   <span id="dev-tag"> DEVELOPMENT PREVIEW </span>
-{:else}
-  <!-- Cloudflare Web Analytics -->
-  <script
-    defer
-    src="https://static.cloudflareinsights.com/beacon.min.js"
-    data-cf-beacon={cf_token_string}
-  ></script>
-  <!-- End Cloudflare Web Analytics -->
-{/if}
+{:else}{/if}
 <nav>
   <menu>
     {#each menuItems as link}
-      <li><a href={link.url}>{link.linkText}</a></li>
+      <li>
+        <a data-umami-event="main_menu_click" href={link.url}
+          >{link.linkText}
+        </a>
+      </li>
     {:else}
       No links!
     {/each}

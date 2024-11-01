@@ -16,9 +16,11 @@
   </h2>
   <p class="text-start">
     Currently in the <a
+      data-umami-event="gds_click"
       href="https://www.gov.uk/government/organisations/government-digital-service/about"
       >Government Digital Service (GDS)</a
-    >, working on <a href="https://gov.uk">GOV.UK</a> and AI.
+    >, working on
+    <a href="https://gov.uk" data-umami-event="gov_uk_click">GOV.UK</a> and AI.
   </p>
 </div>
 

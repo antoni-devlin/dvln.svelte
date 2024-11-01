@@ -13,7 +13,11 @@
         aria-describedby="basic-addon2"
       />
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="submit">Search</button>
+        <button
+          class="btn btn-outline-secondary"
+          type="submit"
+          data-umami-event="site_search">Search</button
+        >
       </div>
     </div>
   </form>

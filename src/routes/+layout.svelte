@@ -49,15 +49,7 @@
 
 {#if PUBLIC_ENV === "DEV"}
   <span id="dev-tag"> DEVELOPMENT PREVIEW </span>
-{:else}
-  <!-- Cloudflare Web Analytics -->
-  <script
-    defer
-    src="https://static.cloudflareinsights.com/beacon.min.js"
-    data-cf-beacon={cf_token_string}
-  ></script>
-  <!-- End Cloudflare Web Analytics -->
-{/if}
+{:else}{/if}
 <nav>
   <menu>
     {#each menuItems as link}

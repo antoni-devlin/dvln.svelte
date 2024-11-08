@@ -4,13 +4,44 @@
   import Markdoc from "@markdoc/markdoc";
   import dayjs from "dayjs";
   post.created_at = dayjs(post.created_at).format("DD/MM/YYYY");
+
   function rendermd(source) {
-    const config = {};
+    const config = {
+      nodes: {
+        image: {
+          render: "div",
+          attributes: {
+            src: { type: String, required: true },
+            alt: { type: String },
+            title: { type: String },
+          },
+          transform(node, config) {
+            const attributes = node.transformAttributes(config);
+            const { src, alt, title } = attributes;
+
+            return new Markdoc.Tag(
+              "div",
+              { class: "markdoc-image-wrapper" },
+              [
+                new Markdoc.Tag("img", {
+                  src,
+                  alt: alt || "",
+                  title: title || "",
+                  class: "markdoc-image",
+                }),
+                alt
+                  ? new Markdoc.Tag("span", { class: "image-caption" }, [alt])
+                  : null,
+              ].filter(Boolean)
+            );
+          },
+        },
+      },
+    };
+
     const ast = Markdoc.parse(source);
     const content = Markdoc.transform(ast, config);
-
-    const html = Markdoc.renderers.html(content);
-    return html;
+    return Markdoc.renderers.html(content);
   }
 </script>
 

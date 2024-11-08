@@ -59,4 +59,27 @@
   .container {
     margin-bottom: 80px;
   }
+
+  :global(.markdoc-image-wrapper) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem auto;
+  }
+
+  :global(.markdoc-image) {
+    max-width: min(100%, 800px);
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  :global(.image-caption) {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+  }
 </style>

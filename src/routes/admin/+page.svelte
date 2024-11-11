@@ -6,13 +6,14 @@
   let { data } = $props();
   let table;
   PUBLIC_ENV === "DEV" ? (table = "dev_posts") : (table = "posts");
+  import { fly } from "svelte/transition";
 
-  const published_posts = posts.filter(
-    (post) => post.publishing_status === "published"
+  let published_posts = $state(
+    posts.filter((post) => post.publishing_status === "published"),
   );
 
-  const draft_posts = posts.filter(
-    (post) => post.publishing_status === "draft"
+  let draft_posts = $state(
+    posts.filter((post) => post.publishing_status === "draft"),
   );
 
   async function deletePostBySlug(slug) {
@@ -26,6 +27,8 @@
       if (!error) {
         posts = posts.filter((post) => post.slug !== slug);
       }
+      draft_posts = draft_posts.filter((post) => post.slug !== slug);
+      posts = posts.filter((post) => post.slug !== slug);
     }
   }
 </script>
@@ -45,7 +48,7 @@
     </thead>
     <tbody>
       {#each published_posts as post}
-        <tr>
+        <tr transition:fly={{ y: 200, duration: 300 }}>
           <td class="title-cell"
             ><a class="post-title" href="/admin/{post.slug}">{post.title}</a>
             {#if post.publishing_status == "draft"}<span

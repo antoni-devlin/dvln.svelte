@@ -19,6 +19,45 @@
     excerpt = $bindable("")
   } = $props();
 
+  async function uploadImage(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      const imageUrl = data.url;
+      insertImageAtCursor(imageUrl);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
+  }
+
+  function insertImageAtCursor(url) {
+    const textarea = document.getElementById("post-body");
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const text = textarea.value;
+
+    const before = text.substring(0, start);
+    const after = text.substring(end, text.length);
+    textarea.value = `${before}![Image](${url})${after}`;
+
+    // Update body binding
+    body = textarea.value;
+  }
+
   async function generateExcerpt() {
     const content = document.getElementById("post-body").value;
     if (content.length < 300) {
@@ -40,7 +79,7 @@
             "Content-Type": "application/json",
           },
           body: JSON.stringify(requestBody), // body data type must match "Content-Type" header
-        }
+        },
       );
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -128,6 +167,17 @@
       <option value="draft">Draft</option>
       <option value="published">Published</option>
     </select>
+  </div>
+
+  <div class="m-3">
+    <label for="image-upload" class="form-label">Upload Image</label>
+    <input
+      type="file"
+      class="form-control"
+      id="image-upload"
+      accept="image/*"
+      on:change={uploadImage}
+    />
   </div>
 
   <div data-mdb-input-init class="editor-wrapper form-outline m-3">

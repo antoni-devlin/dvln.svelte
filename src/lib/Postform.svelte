@@ -176,7 +176,7 @@
       class="form-control"
       id="image-upload"
       accept="image/*"
-      on:change={uploadImage}
+      onchange={uploadImage}
     />
   </div>
 

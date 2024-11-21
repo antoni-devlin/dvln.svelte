@@ -22,6 +22,16 @@
     >, working on
     <a href="https://gov.uk" data-umami-event="gov_uk_click">GOV.UK</a> and AI.
   </p>
+  <p class="text-start">
+    Find me on <a
+      data-umami-event="bluesky_click"
+      href="https://bsky.app/profile/dvln.xyz">Bluesky (@dvln.xyz)</a
+    >
+    and
+    <a data-umami-event="github_click" href="https://github.com/antoni-devlin"
+      >Github (antoni-devlin)</a
+    >.
+  </p>
 </div>
 
 <style>

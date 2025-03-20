@@ -26,16 +26,19 @@
     await goto("/");
   };
 
-  let menuItems = $derived([
-    { linkText: "Home", url: "/", id: "0" },
-    { linkText: "Posts", id: "2" },
-  ].map((item) => ({
-    ...item,
-    url:
-      item.linkText !== "Home"
-        ? `/${item.linkText.replaceAll(" ", "-").toLowerCase()}`
-        : item.url,
-  })));
+  let menuItems = $derived(
+    [
+      { linkText: "Home", url: "/", id: "0" },
+      { linkText: "Posts", id: "2" },
+      { linkText: "Photos", id: "3" },
+    ].map((item) => ({
+      ...item,
+      url:
+        item.linkText !== "Home"
+          ? `/${item.linkText.replaceAll(" ", "-").toLowerCase()}`
+          : item.url,
+    }))
+  );
 </script>
 
 <svelte:head>

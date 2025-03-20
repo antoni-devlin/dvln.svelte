@@ -68,6 +68,14 @@ export async function load() {
       const hasImages =
         post.embed && post.embed.images && post.embed.images.length > 0;
 
+      // Extract alt text if available (new code)
+      if (hasImages && post.embed.images) {
+        post.embed.images.forEach((img) => {
+          // Alt text is available in the 'alt' property if it exists
+          img.altText = img.alt || "";
+        });
+      }
+
       return hasPhotographyTag && hasImages;
     });
 

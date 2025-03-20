@@ -36,15 +36,10 @@
       {#each photographyPosts as post}
         {#each post.post.embed.images as image, imageIndex}
           <!-- Each image becomes a grid item -->
-          <div
-            class="grid-item"
-            on:click={() => handleImageClick(post)}
-            on:keydown={(e) => e.key === "Enter" && handleImageClick(post)}
-            tabindex="0"
-          >
+          <div class="grid-item" on:click={() => handleImageClick(post)}>
             <img
               src={image.fullsize}
-              alt={`Photo by @${post.post.author.handle}`}
+              alt={image.altText || `Photo by @${post.post.author.handle}`}
               loading="lazy"
               class="grid-image"
             />

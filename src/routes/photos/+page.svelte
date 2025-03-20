@@ -3,12 +3,46 @@
 
   const { photographyPosts, error } = data;
 
-  // Function to handle image click for expanded view (optional)
-  function handleImageClick(post) {
-    // You could implement a modal or expanded view here
-    console.log("Image clicked:", post);
+  // Variables to track modal state
+  let isModalOpen = false;
+  let currentModalImage = null;
+  let currentModalCaption = null;
+  let currentModalAuthor = null;
+  let currentModalAltText = null;
+
+  // Function to handle image click for expanded view
+  function handleImageClick(post, image) {
+    currentModalImage = image.fullsize;
+    currentModalCaption = post.post.record.text;
+    currentModalAuthor = post.post.author.handle;
+    currentModalAltText =
+      image.altText || `Photo by @${post.post.author.handle}`;
+    isModalOpen = true;
+    umami.track("Photo clicked");
+  }
+
+  // Function to close the modal
+  function closeModal() {
+    isModalOpen = false;
+    currentModalImage = null;
+  }
+
+  // Close modal when clicking outside the image
+  function handleModalClick(event) {
+    if (event.target.classList.contains("image-modal")) {
+      closeModal();
+    }
+  }
+
+  // Handle keyboard events for accessibility
+  function handleKeydown(event) {
+    if (isModalOpen && event.key === "Escape") {
+      closeModal();
+    }
   }
 </script>
+
+<svelte:window on:keydown={handleKeydown} />
 
 <div class="photography-feed">
   <h1>Photography</h1>
@@ -36,7 +70,7 @@
       {#each photographyPosts as post}
         {#each post.post.embed.images as image, imageIndex}
           <!-- Each image becomes a grid item -->
-          <div class="grid-item" on:click={() => handleImageClick(post)}>
+          <div class="grid-item" on:click={() => handleImageClick(post, image)}>
             <img
               src={image.fullsize}
               alt={image.altText || `Photo by @${post.post.author.handle}`}
@@ -71,6 +105,26 @@
           </div>
         {/each}
       {/each}
+    </div>
+  {/if}
+
+  <!-- Image Modal -->
+  {#if isModalOpen}
+    <div class="image-modal" on:click={handleModalClick}>
+      <div class="modal-container">
+        <span class="close-modal" on:click={closeModal}>&times;</span>
+        <img
+          src={currentModalImage}
+          alt={currentModalAltText}
+          class="modal-content"
+        />
+        {#if currentModalCaption}
+          <div class="modal-caption">
+            <span class="modal-author">@{currentModalAuthor}</span>
+            <p>{currentModalCaption}</p>
+          </div>
+        {/if}
+      </div>
     </div>
   {/if}
 </div>
@@ -177,5 +231,61 @@
     border-radius: 4px;
     background: rgba(255, 0, 0, 0.05);
     margin-bottom: 20px;
+  }
+
+  /* Modal styles */
+  .image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+  }
+
+  .modal-container {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .close-modal {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  .modal-content {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border: 2px solid white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+  }
+
+  .modal-caption {
+    margin-top: 15px;
+    color: white;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 4px;
+  }
+
+  .modal-author {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
   }
 </style>

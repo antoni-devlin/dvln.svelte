@@ -30,7 +30,7 @@ export async function load() {
     //Make a request to get the user's feed
     const params = new URLSearchParams({
       actor: userDid,
-      limit: 50,
+      limit: 70,
     });
 
     const feedResponse = await fetch(

@@ -51,12 +51,12 @@
     (<a href="https://bsky.app/profile/dvln.xyz">@dvln.xyz</a>) with the
     <a href="https://bsky.app/hashtag/photography">#photography</a> tag.
   </p>
-  <div class="error">
+  <!-- <div class="error">
     <p>
       ¯\_(ツ)_/¯ This page is still a work in progress at the moment, and isn't
       reliably displaying all images from my bluesky feed.
     </p>
-  </div>
+  </div> -->
 
   {#if error}
     <div class="error">

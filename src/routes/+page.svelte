@@ -12,7 +12,7 @@
     Hi, my name's Antoni <span class="pronouns">(he/him)</span>
   </h1>
   <h2 class="text-start">
-    Someone called me a "Full stack Content Designer" and I'm running with it.
+    Someone called me a "Full-stack Content Designer" and I'm running with it.
   </h2>
   <p class="text-start">
     Currently in the <a
@@ -20,7 +20,7 @@
       href="https://www.gov.uk/government/organisations/government-digital-service/about"
       >Government Digital Service (GDS)</a
     >, working on
-    <a href="https://gov.uk" data-umami-event="gov_uk_click">GOV.UK</a> and AI.
+    <a href="https://gov.uk" data-umami-event="gov_uk_click">GOV.UK</a>.
   </p>
   <p class="text-start">
     Find me on <a

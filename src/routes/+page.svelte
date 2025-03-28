@@ -8,6 +8,7 @@
     src="https://cdn.jsdelivr.net/gh/antoni-devlin/dvln.svelte/src/images/headshot.jpeg"
     alt=""
   />
+  <!-- TODO: Make this content editable from the admin area -->
   <h1 class="text-start">
     Hi, my name's Antoni <span class="pronouns">(he/him)</span>
   </h1>

@@ -1,19 +1,17 @@
 <script>
-  let { posts } = data;
   import dayjs from "dayjs";
   import { supabase } from "$lib/supabaseClient";
   import { PUBLIC_ENV } from "$env/static/public";
-  let { data } = $props();
-  let table;
-  PUBLIC_ENV === "DEV" ? (table = "dev_posts") : (table = "posts");
 
-  const published_posts = posts.filter(
+  export let data;
+  $: posts = data.posts;
+  $: table = PUBLIC_ENV === "DEV" ? "dev_posts" : "posts";
+
+  $: published_posts = posts.filter(
     (post) => post.publishing_status === "published"
   );
 
-  const draft_posts = posts.filter(
-    (post) => post.publishing_status === "draft"
-  );
+  $: draft_posts = posts.filter((post) => post.publishing_status === "draft");
 
   async function deletePostBySlug(slug) {
     if (
@@ -66,7 +64,8 @@
               class="btn btn-danger"
               role="button"
               href="/admin/"
-              onclick={() => deletePostBySlug(post.slug)}>Delete</a
+              on:click|preventDefault={() => deletePostBySlug(post.slug)}
+              >Delete</a
             >
           </td>
         </tr>
@@ -115,7 +114,8 @@
               class="btn btn-danger"
               role="button"
               href="/admin/"
-              onclick={() => deletePostBySlug(post.slug)}>Delete</a
+              on:click|preventDefault={() => deletePostBySlug(post.slug)}
+              >Delete</a
             >
           </td>
         </tr>

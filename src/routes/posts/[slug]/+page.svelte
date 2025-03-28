@@ -1,9 +1,10 @@
 <script>
-  let post = $state(data);
   import Markdoc from "@markdoc/markdoc";
   import dayjs from "dayjs";
-  let { data } = $props();
-  post.created_at = dayjs(post.created_at).format("DD/MM/YYYY");
+
+  export let data;
+  $: post = data;
+  $: formattedDate = dayjs(post.created_at).format("DD/MM/YYYY");
 
   function rendermd(source) {
     const config = {
@@ -51,7 +52,7 @@
 
 <div class="container w-90 mt-5">
   <h2 class="display-2">{post.title}</h2>
-  <small class="text-body-secondary">{post.created_at}</small>
+  <small class="text-body-secondary">{formattedDate}</small>
   {@html rendermd(post.body)}
 </div>
 

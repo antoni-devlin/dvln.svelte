@@ -1,7 +1,8 @@
 <script>
-  const { posts } = data;
+  export let data;
   import Search from "$lib/Search.svelte";
-  let { data } = $props();
+
+  const { posts = [] } = data ?? {};
 </script>
 
 <svelte:head>

@@ -6,26 +6,26 @@ export async function load() {
 
   try {
     //Authenticate with Bluesky
-    const authResponse = await fetch(
-      `${BLUESKY_API_BASE}/com.atproto.server.createSession`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          identifier: BLUESKY_USERNAME,
-          password: BLUESKY_APP_PASSWORD,
-        }),
-      }
-    );
+    // const authResponse = await fetch(
+    //   `${BLUESKY_API_BASE}/com.atproto.server.createSession`,
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       identifier: BLUESKY_USERNAME,
+    //       password: BLUESKY_APP_PASSWORD,
+    //     }),
+    //   }
+    // );
 
-    if (!authResponse.ok) {
-      throw new Error(`Authentication failed: ${authResponse.status}`);
-    }
+    // if (!authResponse.ok) {
+    //   throw new Error(`Authentication failed: ${authResponse.status}`);
+    // }
 
-    const authData = await authResponse.json();
-    const { accessJwt, did } = authData;
+    // const authData = await authResponse.json();
+    // const { accessJwt, did } = authData;
 
     //Make a request to get the user's feed
     const params = new URLSearchParams({
@@ -33,12 +33,22 @@ export async function load() {
       limit: 70,
     });
 
+    // https://public.api.bsky.app/xrpc/app.bsky.feed.searchPosts?author=dvln.xyz&q=%23photography&tags=photography
+    // const feedResponse = await fetch(
+    //   `${BLUESKY_API_BASE}/app.bsky.feed.getAuthorFeed?${params}`,
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer ${accessJwt}`,
+    //     },
+    //   }
+    // );
+
     const feedResponse = await fetch(
-      `${BLUESKY_API_BASE}/app.bsky.feed.getAuthorFeed?${params}`,
+      `https://public.api.bsky.app/xrpc/app.bsky.feed.searchPosts?author=dvln.xyz&q=%23photography&tags=photography`,
       {
-        headers: {
-          Authorization: `Bearer ${accessJwt}`,
-        },
+        // headers: {
+        //   Authorization: `Bearer ${accessJwt}`,
+        // },
       }
     );
 
@@ -52,13 +62,9 @@ export async function load() {
     // 1. Contain "#photography" hashtag
     // 2. Contain images
     // 3. Are not reposts
-    const photographyPosts = data.feed.filter((item) => {
+    const photographyPosts = data.posts.filter((post) => {
       // Skip reposts
-      if (item.reason) {
-        return false;
-      }
 
-      const post = item.post;
       const text = post.record.text || "";
 
       // Check for #photography hashtag

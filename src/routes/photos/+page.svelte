@@ -68,12 +68,12 @@
     <!-- Instagram-style grid layout -->
     <div class="instagram-grid">
       {#each photographyPosts as post}
-        {#each post.post.embed.images as image, imageIndex}
+        {#each post.embed.images as image, imageIndex}
           <!-- Each image becomes a grid item -->
           <div class="grid-item" on:click={() => handleImageClick(post, image)}>
             <img
               src={image.fullsize}
-              alt={image.altText || `Photo by @${post.post.author.handle}`}
+              alt={image.altText || `Photo by @${post.author.handle}`}
               loading="lazy"
               class="grid-image"
             />
@@ -82,22 +82,22 @@
             <div class="overlay">
               <div class="overlay-content">
                 <div class="author-info">
-                  {#if post.post.author.avatar}
+                  {#if post.author.avatar}
                     <img
-                      src={post.post.author.avatar}
+                      src={post.author.avatar}
                       alt="Profile"
                       class="avatar"
                     />
                   {/if}
-                  <span class="author-name">@{post.post.author.handle}</span>
+                  <span class="author-name">@{post.author.handle}</span>
                 </div>
 
                 <!-- Show truncated text as a caption -->
-                {#if post.post.record.text}
+                {#if post.record.text}
                   <p class="caption">
-                    {post.post.record.text.length > 60
-                      ? post.post.record.text.substring(0, 60) + "..."
-                      : post.post.record.text}
+                    {post.record.text.length > 60
+                      ? post.record.text.substring(0, 60) + "..."
+                      : post.record.text}
                   </p>
                 {/if}
               </div>
